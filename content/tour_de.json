@@ -1,0 +1,2356 @@
+{
+  "tour": {
+    "id": "qgis",
+    "title": "QGIS-Grundlagen",
+    "welcome_title": "Willkommen bei QGIS!",
+    "order": 10
+  },
+  "welcome": "<p>Diese Tour zeigt dir Schritt für Schritt die wichtigsten Bedienelemente von QGIS. Das jeweilige Element wird direkt in der Oberfläche <b style='color:#c77c00'>orange hervorgehoben</b> – auch in Dialogen und im Layout-Fenster.</p><p>So funktioniert es:</p><ul><li><b>Komplette Tour</b> – alle Themen nacheinander (ca. 45–60 Minuten). Du kannst jederzeit unterbrechen und später weitermachen.</li><li><b>Einzelnes Thema</b> – Doppelklick auf ein Thema oder einen Schritt in der Liste oben. So kannst du auch später jederzeit etwas nachschlagen.</li><li><b>Suche</b> – gib oben ein Stichwort ein, z.&nbsp;B. <i>Attributtabelle</i> oder <i>zoomen</i>.</li></ul><p>Bei manchen Schritten gibt es eine kleine <b>Aufgabe</b>. Sobald du sie erledigt hast, merkt die Tour das automatisch. Du kannst aber auch einfach auf <b>Weiter</b> klicken.</p><p>Keine Sorge: Die Tour verändert keine deiner Daten. Zum Üben kannst du per Knopfdruck einen Beispiel-Layer erzeugen.</p><p>Ist dir die Schrift zu klein oder zu groß? Unten mit <b>A−</b> / <b>A+</b> anpassen.</p>",
+  "finished": "<p>Du hast die komplette Tour geschafft – herzlichen Glückwunsch!</p><p>Alle Themen bleiben hier im Bedienfeld verfügbar. Wenn du später etwas vergessen hast, such einfach oben nach einem Stichwort oder doppelklick auf ein Thema.</p><p>Weiterführende Hilfe:</p><ul><li><a href='https://docs.qgis.org/latest/de/docs/user_manual/'>QGIS-Benutzerhandbuch</a></li><li><a href='https://docs.qgis.org/latest/de/docs/training_manual/'>QGIS-Trainingshandbuch</a></li></ul>",
+  "topics": [
+    {
+      "id": "start",
+      "title": "Überblick über die Oberfläche",
+      "description": "Die Bereiche des QGIS-Hauptfensters",
+      "steps": [
+        {
+          "id": "start.willkommen",
+          "title": "Das Tour-Bedienfeld",
+          "text": "<p>Hier, in diesem Bedienfeld, siehst du während der Tour immer die Erklärung zum aktuellen Schritt.</p><p>Mit <b>Weiter</b> und <b>Zurück</b> bewegst du dich durch die Schritte. <b>Zeigen</b> hebt das Bedienelement noch einmal hervor, falls du es aus den Augen verloren hast.</p><p>Du kannst das Bedienfeld an der Titelleiste anfassen und woandershin ziehen, falls es stört. Die Schriftgröße stellst du unten mit <b>A−</b> / <b>A+</b> ein.</p>",
+          "targets": [
+            {
+              "type": "tour_dock"
+            }
+          ],
+          "keywords": [
+            "tour",
+            "hilfe",
+            "bedienfeld",
+            "schrift",
+            "schriftgröße"
+          ]
+        },
+        {
+          "id": "start.menue",
+          "title": "Die Menüleiste",
+          "text": "<p>Ganz oben findest du die <b>Menüleiste</b>. Hier ist (fast) jede Funktion von QGIS erreichbar:</p><ul><li><b>Projekt</b> – Projekte öffnen, speichern, drucken</li><li><b>Bearbeiten</b> – Objekte digitalisieren, Rückgängig</li><li><b>Ansicht</b> – Bedienfelder und Werkzeugleisten ein-/ausblenden</li><li><b>Layer</b> – Daten hinzufügen, Layer-Eigenschaften</li><li><b>Einstellungen</b> – Optionen, Koordinatenbezugssysteme</li><li><b>Erweiterungen</b> – Plugins verwalten</li><li><b>Vektor / Raster / Datenbank / Web</b> – Analysewerkzeuge</li><li><b>Verarbeitung</b> – die Werkzeugkiste</li><li><b>Hilfe</b> – Handbuch und diese Tour</li></ul>",
+          "targets": [
+            {
+              "type": "menubar"
+            }
+          ],
+          "keywords": [
+            "menü",
+            "menu"
+          ]
+        },
+        {
+          "id": "start.werkzeugleisten",
+          "title": "Werkzeugleisten",
+          "text": "<p>Unter der Menüleiste liegen die <b>Werkzeugleisten</b> mit Symbolen für häufig genutzte Funktionen. Hervorgehoben ist die Leiste <i>Projekt</i>.</p><p>Fahr mit der Maus über ein Symbol und warte kurz – ein <b>Tooltip</b> verrät dir, was das Werkzeug macht.</p><p>Mit einem <b>Rechtsklick auf eine freie Stelle</b> der Werkzeugleisten kannst du Leisten ein- und ausblenden. Am linken Rand (gepunktete Linie) lassen sie sich auch verschieben.</p>",
+          "targets": [
+            {
+              "type": "toolbar",
+              "name": "mFileToolBar"
+            },
+            {
+              "type": "toolbar",
+              "name": "mMapNavToolBar"
+            }
+          ],
+          "keywords": [
+            "toolbar",
+            "symbolleiste",
+            "werkzeugleiste",
+            "ausgeblendet"
+          ]
+        },
+        {
+          "id": "start.karte",
+          "title": "Die Kartenansicht",
+          "text": "<p>Der große Bereich in der Mitte ist die <b>Kartenansicht</b> (auch <i>Kartenfenster</i> oder <i>Canvas</i>). Hier werden alle eingeschalteten Layer dargestellt.</p><p>Solange noch keine Daten geladen sind, bleibt sie leer – das ändern wir gleich.</p>",
+          "targets": [
+            {
+              "type": "canvas"
+            }
+          ],
+          "keywords": [
+            "karte",
+            "canvas",
+            "kartenfenster"
+          ]
+        },
+        {
+          "id": "start.layer",
+          "title": "Das Layer-Bedienfeld",
+          "text": "<p>Im <b>Layer-Bedienfeld</b> stehen alle Layer des Projekts. Die Reihenfolge entspricht der Zeichenreihenfolge: Was oben steht, liegt in der Karte oben.</p><p>Mehr dazu im Thema <i>Mit Layern arbeiten</i>.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "keywords": [
+            "layer",
+            "ebenen",
+            "legende",
+            "toc"
+          ]
+        },
+        {
+          "id": "start.browser",
+          "title": "Das Browser-Bedienfeld",
+          "text": "<p>Der <b>Browser</b> funktioniert wie ein Datei-Explorer speziell für Geodaten: Laufwerke, Ordner, Datenbanken, WMS-/WFS-Dienste und Hintergrundkarten (<i>XYZ Tiles</i>).</p><p>Einen Datensatz lädst du per <b>Doppelklick</b> oder indem du ihn in die Karte <b>ziehst</b>. Ordner, die du oft brauchst, kannst du per Rechtsklick zu den <i>Favoriten</i> hinzufügen.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Browser"
+            },
+            {
+              "type": "dock",
+              "name": "Browser2"
+            }
+          ],
+          "keywords": [
+            "browser",
+            "explorer",
+            "dateien",
+            "favoriten"
+          ]
+        },
+        {
+          "id": "start.statusleiste",
+          "title": "Die Statusleiste",
+          "text": "<p>Ganz unten zeigt die <b>Statusleiste</b> wichtige Informationen:</p><ul><li><b>Koordinate</b> der Maus in der Karte</li><li><b>Maßstab</b> – auch direkt eingebbar</li><li><b>Lupe</b> und <b>Drehung</b> der Karte</li><li>das <b>Koordinatenbezugssystem</b> (KBS) des Projekts, z.&nbsp;B. <i>EPSG:25832</i></li><li>die <b>Meldungen</b>-Schaltfläche (Sprechblase) für Protokolle</li></ul>",
+          "targets": [
+            {
+              "type": "statusbar"
+            }
+          ],
+          "keywords": [
+            "statusleiste",
+            "koordinaten",
+            "maßstab",
+            "status"
+          ]
+        },
+        {
+          "id": "start.suche",
+          "title": "Die Suchleiste (Locator)",
+          "text": "<p>Unten links findest du die <b>Suchleiste</b>. Mit ihr findest du fast alles: Werkzeuge, Layer, Verarbeitungsalgorithmen, Einstellungen, Objekte in Layern und mehr.</p><p>Tastenkürzel: <b>Strg + K</b>.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "name": "QgsLocatorWidget"
+            },
+            {
+              "type": "statusbar"
+            }
+          ],
+          "task": "Klick in die Suchleiste und tipp z.&nbsp;B. <i>Puffer</i> ein.",
+          "complete_on": {
+            "type": "text_entered",
+            "in_class": "QgsLocatorWidget",
+            "texts": [
+              "puffer",
+              "buffer"
+            ]
+          },
+          "keywords": [
+            "suche",
+            "locator",
+            "finden",
+            "strg+k"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projekt",
+      "title": "Projekte anlegen und speichern",
+      "description": "Was ein QGIS-Projekt ist und wie du es speicherst",
+      "steps": [
+        {
+          "id": "projekt.was",
+          "title": "Was ist ein Projekt?",
+          "text": "<p>Ein <b>QGIS-Projekt</b> (Datei <i>.qgz</i>) speichert, <i>welche</i> Layer geladen sind und <i>wie</i> sie dargestellt werden – Farben, Beschriftungen, Kartenausschnitt, Drucklayouts.</p><p><b>Wichtig:</b> Die Daten selbst stecken <i>nicht</i> im Projekt. Das Projekt verweist nur auf die Dateien bzw. Datenbanken. Wenn du Daten verschiebst, findet das Projekt sie nicht mehr.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mProjectMenu",
+              "titles": [
+                "Projekt",
+                "Project"
+              ]
+            }
+          ],
+          "keywords": [
+            "projekt",
+            "qgz",
+            "qgs"
+          ]
+        },
+        {
+          "id": "projekt.neu",
+          "title": "Neues Projekt",
+          "text": "<p>Mit diesem Symbol (oder <b>Strg + N</b>) beginnst du ein neues, leeres Projekt.</p><p>Hast du am aktuellen Projekt noch ungespeicherte Änderungen, fragt QGIS vorher nach.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionNewProject"
+            }
+          ],
+          "keywords": [
+            "neu",
+            "neues projekt",
+            "strg+n"
+          ]
+        },
+        {
+          "id": "projekt.speichern",
+          "title": "Projekt speichern",
+          "text": "<p>Speicher dein Projekt regelmäßig mit diesem Symbol oder <b>Strg + S</b>. Beim ersten Speichern wählst du Ordner und Dateinamen.</p><p>Tipp: Leg das Projekt in denselben Ordner wie die Daten – dann bleiben die Verweise auch beim Kopieren gültig.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionSaveProject"
+            }
+          ],
+          "task": "Speicher das aktuelle Projekt (z.&nbsp;B. als <i>Uebung.qgz</i>).",
+          "complete_on": {
+            "type": "project_saved"
+          },
+          "keywords": [
+            "speichern",
+            "strg+s",
+            "sichern"
+          ]
+        },
+        {
+          "id": "projekt.kbs",
+          "title": "Koordinatenbezugssystem des Projekts",
+          "text": "<p>Jedes Projekt hat ein <b>Koordinatenbezugssystem (KBS)</b>. QGIS projiziert alle Layer automatisch („on the fly“) in dieses System.</p><p>In Deutschland verbreitet ist <b>ETRS89 / UTM Zone 32N (EPSG:25832)</b>. Ein Klick auf die hervorgehobene Schaltfläche öffnet die Einstellung.</p><p>Das Projekt übernimmt automatisch das KBS des ersten Layers, den du lädst.</p>",
+          "targets": [
+            {
+              "type": "object",
+              "name": "mOntheFlyProjectionStatusButton"
+            },
+            {
+              "type": "object",
+              "name": "mOnTheFlyProjectionStatusButton"
+            },
+            {
+              "type": "statusbar"
+            }
+          ],
+          "keywords": [
+            "kbs",
+            "crs",
+            "epsg",
+            "projektion",
+            "koordinatensystem",
+            "25832"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daten",
+      "title": "Daten laden",
+      "description": "Vektor-, Raster- und Kartendienste ins Projekt holen",
+      "steps": [
+        {
+          "id": "daten.dsm",
+          "title": "Die Datenquellenverwaltung öffnen",
+          "text": "<p>Die <b>Datenquellenverwaltung</b> (<b>Strg + L</b>) bündelt alle Wege, Daten zu laden: Vektor (Shapefile, GeoPackage …), Raster (GeoTIFF …), Textdateien (CSV mit Koordinaten), Datenbanken (PostGIS) sowie Dienste (WMS, WFS, XYZ).</p><p>Sie öffnet sich als eigenes Fenster – die Tour zeigt dir darin gleich die wichtigsten Stellen.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionDataSourceManager"
+            }
+          ],
+          "task": "Öffne die Datenquellenverwaltung.",
+          "complete_on": {
+            "type": "window_opened",
+            "window": "QgsDataSourceManagerDialog"
+          },
+          "helpers": [
+            "open_dsm"
+          ],
+          "keywords": [
+            "daten laden",
+            "hinzufügen",
+            "datenquelle",
+            "datenquellenverwaltung",
+            "strg+l"
+          ]
+        },
+        {
+          "id": "daten.dsm_liste",
+          "title": "Den Datentyp wählen",
+          "text": "<p>In der <b>Liste links</b> wählst du, <i>was</i> du laden willst. Jeder Eintrag öffnet rechts eine eigene Seite:</p><ul><li><b>Browser</b> – derselbe Datei-Explorer wie im Hauptfenster</li><li><b>Vektor</b> – Shapefile, GeoPackage, KML, DXF …</li><li><b>Raster</b> – GeoTIFF, JPEG2000, ECW …</li><li><b>Getrennte Texte</b> – CSV-Dateien mit Koordinatenspalten</li><li><b>PostgreSQL</b> u.&nbsp;a. – Datenbanken</li><li><b>WMS/WMTS, WFS, XYZ</b> – Kartendienste aus dem Netz</li></ul>",
+          "targets": [
+            {
+              "type": "object",
+              "window": "QgsDataSourceManagerDialog",
+              "name": "mOptionsListWidget"
+            },
+            {
+              "type": "class",
+              "window": "QgsDataSourceManagerDialog",
+              "name": "QListWidget"
+            },
+            {
+              "type": "action",
+              "name": "actionDataSourceManager"
+            }
+          ],
+          "task": "Wähl links den Eintrag <i>Vektor</i>.",
+          "complete_on": {
+            "type": "item_selected",
+            "window": "QgsDataSourceManagerDialog",
+            "texts": [
+              "Vektor",
+              "Vector"
+            ]
+          },
+          "helpers": [
+            "open_dsm"
+          ],
+          "keywords": [
+            "vektor",
+            "raster",
+            "csv",
+            "datentyp",
+            "liste"
+          ]
+        },
+        {
+          "id": "daten.dsm_vektor",
+          "title": "Eine Vektordatei auswählen",
+          "text": "<p>Auf der Seite <b>Vektor</b> lässt du <i>Quelltyp: Datei</i> eingestellt und klickst beim Feld <b>Vektordatensätze</b> auf den Knopf <b>…</b> – dann wählst du deine Datei aus.</p><p>Mit <b>Hinzufügen</b> wird der Layer geladen. Das Fenster bleibt offen, damit du direkt weitere Daten laden kannst.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsDataSourceManagerDialog",
+              "name": "QgsFileWidget"
+            },
+            {
+              "type": "item",
+              "window": "QgsDataSourceManagerDialog",
+              "texts": [
+                "Vektor",
+                "Vector"
+              ]
+            },
+            {
+              "type": "action",
+              "name": "actionDataSourceManager"
+            }
+          ],
+          "helpers": [
+            "open_dsm"
+          ],
+          "keywords": [
+            "vektordatei",
+            "shapefile",
+            "geopackage",
+            "gpkg",
+            "datei öffnen"
+          ]
+        },
+        {
+          "id": "daten.dsm_dienste",
+          "title": "Kartendienste (WMS, WFS, XYZ)",
+          "text": "<p>Viele Behörden stellen Karten als <b>Dienste</b> bereit, z.&nbsp;B. Luftbilder oder Liegenschaftskarten als <b>WMS</b>. Auf den Seiten <i>WMS/WMTS</i>, <i>WFS</i> oder <i>XYZ</i> legst du dazu einmalig eine <b>Verbindung</b> an (Knopf <i>Neu</i>, Adresse des Dienstes eintragen).</p><p>Danach klickst du auf <b>Verbinden</b>, wählst die Ebene aus und fügst sie hinzu.</p>",
+          "targets": [
+            {
+              "type": "item",
+              "window": "QgsDataSourceManagerDialog",
+              "texts": [
+                "WMS/WMTS",
+                "WMS"
+              ]
+            },
+            {
+              "type": "item",
+              "window": "QgsDataSourceManagerDialog",
+              "texts": [
+                "XYZ"
+              ]
+            },
+            {
+              "type": "action",
+              "name": "actionDataSourceManager"
+            }
+          ],
+          "helpers": [
+            "open_dsm"
+          ],
+          "keywords": [
+            "wms",
+            "wmts",
+            "wfs",
+            "dienst",
+            "luftbild",
+            "verbindung",
+            "geoportal"
+          ]
+        },
+        {
+          "id": "daten.dsm_schliessen",
+          "title": "Fenster schließen",
+          "text": "<p>Wenn du fertig bist, schließt du die Datenquellenverwaltung über <b>Schließen</b>. Bereits hinzugefügte Layer bleiben natürlich im Projekt.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsDataSourceManagerDialog",
+              "texts": [
+                "Schließen",
+                "Close"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsDataSourceManagerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionDataSourceManager"
+            }
+          ],
+          "task": "Schließ die Datenquellenverwaltung.",
+          "complete_on": {
+            "type": "window_closed",
+            "window": "QgsDataSourceManagerDialog"
+          },
+          "keywords": [
+            "schließen",
+            "close"
+          ]
+        },
+        {
+          "id": "daten.osm",
+          "title": "Eine Hintergrundkarte laden",
+          "text": "<p>Eine Hintergrundkarte hilft bei der Orientierung. Im <b>Browser</b> findest du unter <b>XYZ Tiles</b> den Eintrag <b>OpenStreetMap</b>: Klapp <i>XYZ Tiles</i> mit dem kleinen Pfeil auf und doppelklick auf <i>OpenStreetMap</i>.</p><p>Alternativ nimmst du den Knopf unten. (Dafür brauchst du eine Internetverbindung.)</p>",
+          "targets": [
+            {
+              "type": "item",
+              "in_dock": "Browser",
+              "texts": [
+                "OpenStreetMap"
+              ]
+            },
+            {
+              "type": "item",
+              "in_dock": "Browser",
+              "texts": [
+                "XYZ Tiles"
+              ],
+              "depth": 1
+            },
+            {
+              "type": "dock",
+              "name": "Browser"
+            },
+            {
+              "type": "dock",
+              "name": "Browser2"
+            }
+          ],
+          "task": "Lade die OpenStreetMap-Karte über den Browser oder den Knopf.",
+          "complete_on": {
+            "type": "layer_added"
+          },
+          "helpers": [
+            "load_osm"
+          ],
+          "keywords": [
+            "osm",
+            "openstreetmap",
+            "hintergrund",
+            "xyz",
+            "basemap"
+          ]
+        },
+        {
+          "id": "daten.beispiel",
+          "title": "Beispieldaten für die Übungen",
+          "text": "<p>Für die folgenden Themen brauchen wir einen Vektorlayer mit Attributen. Mit dem Knopf unten erzeugt die Tour einen kleinen <b>temporären Punktlayer</b> mit zehn Städten aus NRW.</p><p>Temporäre Layer (erkennbar am Chip-Symbol im Layer-Bedienfeld) existieren nur im Arbeitsspeicher und gehen beim Schließen verloren – ideal zum Üben.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Erzeug den Beispiel-Punktlayer.",
+          "complete_on": {
+            "type": "layer_added"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "beispiel",
+            "übung",
+            "temporär",
+            "memory",
+            "scratch"
+          ]
+        },
+        {
+          "id": "daten.dragdrop",
+          "title": "Dateien per Drag & Drop",
+          "text": "<p>Der schnellste Weg: Zieh eine Datei (z.&nbsp;B. <i>.gpkg</i>, <i>.shp</i>, <i>.tif</i>, <i>.csv</i>, <i>.kml</i>) direkt aus dem Windows-Explorer <b>in die Kartenansicht</b>. QGIS erkennt das Format selbst.</p><p>Bei Shapefiles reicht es, die <i>.shp</i>-Datei zu ziehen – die zugehörigen Dateien (.dbf, .shx, .prj) müssen aber im selben Ordner liegen.</p>",
+          "targets": [
+            {
+              "type": "canvas"
+            }
+          ],
+          "keywords": [
+            "drag",
+            "drop",
+            "ziehen",
+            "explorer",
+            "shapefile"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "layer",
+      "title": "Mit Layern arbeiten",
+      "description": "Sichtbarkeit, Reihenfolge, aktiver Layer, Eigenschaften",
+      "steps": [
+        {
+          "id": "layer.sichtbarkeit",
+          "title": "Layer ein- und ausblenden",
+          "text": "<p>Das <b>Häkchen</b> vor einem Layer schaltet ihn in der Karte sichtbar oder unsichtbar. Der Layer bleibt dabei im Projekt.</p><p>Mit <b>Strg + Klick</b> auf ein Häkchen schaltest du alle Layer gleichzeitig um.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Blende einen Layer aus und wieder ein.",
+          "complete_on": {
+            "type": "visibility_changed"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "sichtbar",
+            "häkchen",
+            "ausblenden",
+            "einblenden"
+          ]
+        },
+        {
+          "id": "layer.reihenfolge",
+          "title": "Reihenfolge und Gruppen",
+          "text": "<p>Zieh Layer mit der Maus nach oben oder unten, um die <b>Zeichenreihenfolge</b> zu ändern. Hintergrundkarten gehören nach unten, Punkte nach oben.</p><p>Über das Symbol <i>Gruppe hinzufügen</i> (oder Rechtsklick → <i>Gruppe auswählen</i>) fasst du Layer zu <b>Gruppen</b> zusammen.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "keywords": [
+            "reihenfolge",
+            "gruppe",
+            "sortieren",
+            "oben",
+            "unten"
+          ]
+        },
+        {
+          "id": "layer.aktiv",
+          "title": "Der aktive Layer",
+          "text": "<p>Der <b>markierte</b> (blau hinterlegte) Layer ist der <b>aktive Layer</b>. Viele Werkzeuge – Abfragen, Auswählen, Bearbeiten, Attributtabelle – wirken immer auf den aktiven Layer.</p><p>Wenn ein Werkzeug „nichts tut“, ist oft der falsche Layer aktiv.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Klick im Layer-Bedienfeld auf einen anderen Layer.",
+          "complete_on": {
+            "type": "current_layer_changed"
+          },
+          "keywords": [
+            "aktiv",
+            "markiert",
+            "ausgewählt"
+          ]
+        },
+        {
+          "id": "layer.eigenschaften",
+          "title": "Kontextmenü und Eigenschaften",
+          "text": "<p>Ein <b>Rechtsklick</b> auf einen Layer öffnet das Kontextmenü, u.&nbsp;a. mit:</p><ul><li><i>Auf Layer zoomen</i></li><li><i>Attributtabelle öffnen</i></li><li><i>Exportieren → Objekte speichern als …</i> (z.&nbsp;B. um einen temporären Layer dauerhaft zu speichern)</li><li><i>Layer entfernen</i></li><li><i>Eigenschaften …</i></li></ul><p>Ein <b>Doppelklick</b> auf den Layer öffnet direkt die <b>Layereigenschaften</b> mit Symbolisierung, Beschriftung, Quelle, Feldern usw.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "keywords": [
+            "kontextmenü",
+            "rechtsklick",
+            "eigenschaften",
+            "exportieren",
+            "speichern als",
+            "entfernen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "In der Karte navigieren",
+      "description": "Verschieben, zoomen, Maßstab",
+      "steps": [
+        {
+          "id": "navigation.pan",
+          "title": "Karte verschieben",
+          "text": "<p>Mit dem <b>Hand-Werkzeug</b> verschiebst du die Karte, indem du sie mit gedrückter linker Maustaste ziehst.</p><p>Tipp: Bei <i>jedem</i> Werkzeug kannst du die Karte verschieben, wenn du die <b>Leertaste</b> gedrückt hältst oder mit <b>gedrücktem Mausrad</b> ziehst.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionPan"
+            }
+          ],
+          "task": "Aktivier das Hand-Werkzeug und verschieb die Karte.",
+          "complete_on": {
+            "type": "map_tool",
+            "action": "actionPan"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "verschieben",
+            "pan",
+            "hand",
+            "leertaste"
+          ]
+        },
+        {
+          "id": "navigation.zoom",
+          "title": "Zoomen",
+          "text": "<p>Am schnellsten zoomst du mit dem <b>Mausrad</b> – gezoomt wird zur Mausposition hin.</p><p>Mit den Lupen-Werkzeugen kannst du außerdem ein <b>Rechteck aufziehen</b>, auf das dann gezoomt wird.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionZoomIn"
+            }
+          ],
+          "task": "Zoom mit dem Mausrad in die Karte hinein.",
+          "complete_on": {
+            "type": "extent_changed"
+          },
+          "keywords": [
+            "zoom",
+            "zoomen",
+            "mausrad",
+            "lupe",
+            "vergrößern"
+          ]
+        },
+        {
+          "id": "navigation.voll",
+          "title": "Volle Ausdehnung",
+          "text": "<p>Hast du dich „verirrt“? Dieses Werkzeug (<b>Strg + Umschalt + F</b>) zoomt so, dass alle Layer sichtbar sind.</p><p>Auf einen einzelnen Layer zoomst du per Rechtsklick im Layer-Bedienfeld → <i>Auf Layer zoomen</i>.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionZoomFullExtent"
+            }
+          ],
+          "task": "Klick auf „Volle Ausdehnung“.",
+          "complete_on": {
+            "type": "action_triggered",
+            "action": "actionZoomFullExtent"
+          },
+          "keywords": [
+            "volle ausdehnung",
+            "alles",
+            "verirrt",
+            "zoom full"
+          ]
+        },
+        {
+          "id": "navigation.massstab",
+          "title": "Maßstab eingeben",
+          "text": "<p>In der Statusleiste siehst du den aktuellen <b>Maßstab</b>. Du kannst ihn auch direkt eintippen, z.&nbsp;B. <i>1:25000</i>, und mit Enter bestätigen – oder einen aus der Liste wählen.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "name": "QgsStatusBarScaleWidget"
+            },
+            {
+              "type": "statusbar"
+            }
+          ],
+          "task": "Stell einen anderen Maßstab ein.",
+          "complete_on": {
+            "type": "extent_changed"
+          },
+          "keywords": [
+            "maßstab",
+            "scale",
+            "1:"
+          ]
+        },
+        {
+          "id": "navigation.lesezeichen",
+          "title": "Vorheriger Ausschnitt und Lesezeichen",
+          "text": "<p>Wie im Webbrowser gibt es <b>Zurück</b> und <b>Vor</b> für Kartenausschnitte (Werkzeugleiste <i>Kartennavigation</i>).</p><p>Ausschnitte, die du öfter brauchst, speicherst du als <b>räumliche Lesezeichen</b> (<b>Strg + B</b>).</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionZoomLast"
+            },
+            {
+              "type": "toolbar",
+              "name": "mMapNavToolBar"
+            }
+          ],
+          "keywords": [
+            "lesezeichen",
+            "bookmark",
+            "zurück",
+            "vorheriger ausschnitt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abfragen",
+      "title": "Informationen abfragen",
+      "description": "Objekte abfragen, Attributtabelle, Auswahl, Messen",
+      "steps": [
+        {
+          "id": "abfragen.identify",
+          "title": "Objekte abfragen",
+          "text": "<p>Mit dem Werkzeug <b>Objekte abfragen</b> (<b>Strg + Umschalt + I</b>) klickst du auf ein Objekt in der Karte und siehst rechts seine <b>Attribute</b>.</p><p>Im Ergebnisfenster kannst du oben einstellen, ob nur der aktive Layer oder alle Layer abgefragt werden.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionIdentify"
+            }
+          ],
+          "task": "Aktivier das Abfragewerkzeug und klick auf eine Stadt.",
+          "complete_on": {
+            "type": "map_tool",
+            "action": "actionIdentify"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "abfragen",
+            "identify",
+            "info",
+            "attribute",
+            "klick"
+          ]
+        },
+        {
+          "id": "abfragen.tabelle",
+          "title": "Die Attributtabelle",
+          "text": "<p>Die <b>Attributtabelle</b> (<b>F6</b>) zeigt alle Objekte des aktiven Layers als Tabelle. Ein Klick auf einen Spaltenkopf sortiert.</p><p>Unten links kannst du filtern, z.&nbsp;B. nur <i>ausgewählte</i> Objekte anzeigen. Über das Lupen-Symbol zoomst du auf markierte Zeilen.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionOpenTable"
+            }
+          ],
+          "task": "Öffne die Attributtabelle des Beispiel-Layers.",
+          "complete_on": {
+            "type": "action_triggered",
+            "action": "actionOpenTable"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "attributtabelle",
+            "tabelle",
+            "f6",
+            "sortieren",
+            "filter"
+          ]
+        },
+        {
+          "id": "abfragen.auswahl",
+          "title": "Objekte auswählen",
+          "text": "<p>Ausgewählte Objekte werden gelb dargestellt. Viele Werkzeuge (Exportieren, Verarbeitung) können sich auf die Auswahl beschränken.</p><ul><li>Klicken oder Rechteck aufziehen = neue Auswahl</li><li><b>Umschalt</b> = zur Auswahl hinzufügen</li><li><b>Strg</b> = aus der Auswahl entfernen</li></ul><p>Über den kleinen Pfeil am Symbol gibt es weitere Auswahlformen (Polygon, Freihand, Radius) und daneben <i>Auswahl per Ausdruck</i>.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionSelect"
+            },
+            {
+              "type": "action",
+              "name": "actionSelectRectangle"
+            }
+          ],
+          "task": "Wähl ein paar Städte in der Karte aus.",
+          "complete_on": {
+            "type": "selection_changed"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "auswahl",
+            "auswählen",
+            "select",
+            "gelb",
+            "markieren"
+          ]
+        },
+        {
+          "id": "abfragen.messen",
+          "title": "Strecken und Flächen messen",
+          "text": "<p>Mit dem <b>Lineal</b> (<b>Strg + Umschalt + M</b>) misst du Strecken: Klick Punkte an, ein Rechtsklick beendet die Messung. Über den Pfeil am Symbol gibt es auch Flächen- und Winkelmessung.</p><p>Gemessen wird standardmäßig <b>ellipsoidisch</b>, also auch in nicht-metrischen Systemen korrekt in Metern.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionMeasure"
+            }
+          ],
+          "task": "Miss die Entfernung zwischen zwei Städten.",
+          "complete_on": {
+            "type": "map_tool",
+            "action": "actionMeasure"
+          },
+          "keywords": [
+            "messen",
+            "lineal",
+            "entfernung",
+            "fläche",
+            "distanz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filter",
+      "title": "Layer filtern",
+      "description": "Nur bestimmte Objekte eines Layers anzeigen – per Filter/Abfrage",
+      "steps": [
+        {
+          "id": "filter.was",
+          "title": "Filter oder Auswahl?",
+          "text": "<p>Ein <b>Filter</b> blendet alle Objekte aus, die eine Bedingung nicht erfüllen – in der Karte, in der Attributtabelle <i>und</i> für alle Analysen. Für QGIS sieht der Layer dann so aus, als gäbe es nur diese Objekte.</p><p>Eine <b>Auswahl</b> (gelb) markiert Objekte dagegen nur, alle anderen bleiben da.</p><p>Der Filter wird mit dem Projekt gespeichert. Die Daten selbst bleiben unverändert – der Filter lässt sich jederzeit wieder entfernen.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "filter",
+            "abfrage",
+            "subset",
+            "auswahl",
+            "unterschied",
+            "ausblenden"
+          ]
+        },
+        {
+          "id": "filter.oeffnen",
+          "title": "Den Filter-Dialog öffnen",
+          "text": "<p>Rechtsklick auf den Layer im Layer-Bedienfeld → <b>Filter …</b> (oder <b>Strg + F</b>, wenn der Layer markiert ist).</p><p>Alternativ: Doppelklick auf den Layer → <i>Quelle</i> → <i>Abfrageerstellung</i>.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Öffne den Filter-Dialog für die Beispielstädte.",
+          "complete_on": {
+            "type": "window_opened",
+            "window": "QgsQueryBuilder"
+          },
+          "helpers": [
+            "load_sample_points",
+            "open_filter"
+          ],
+          "keywords": [
+            "filter öffnen",
+            "abfrageerstellung",
+            "strg+f",
+            "query builder"
+          ]
+        },
+        {
+          "id": "filter.felder",
+          "title": "Felder",
+          "text": "<p>Links stehen alle <b>Felder</b> (Spalten) des Layers. Ein <b>Doppelklick</b> auf ein Feld schreibt seinen Namen unten in den Ausdruck – in Anführungszeichen, z.&nbsp;B. <code>\"typ\"</code>.</p>",
+          "targets": [
+            {
+              "type": "object",
+              "window": "QgsQueryBuilder",
+              "name": "lstFields"
+            },
+            {
+              "type": "item",
+              "window": "QgsQueryBuilder",
+              "texts": [
+                "typ",
+                "name"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsQueryBuilder"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "helpers": [
+            "open_filter"
+          ],
+          "keywords": [
+            "felder",
+            "spalten",
+            "feldname"
+          ]
+        },
+        {
+          "id": "filter.werte",
+          "title": "Werte und Operatoren",
+          "text": "<p>Markier links ein Feld und klick rechts auf <b>Alle</b> – dann siehst du alle Werte, die in diesem Feld vorkommen (<b>Beispiel</b> zeigt nur die ersten 25). Ein Doppelklick übernimmt den Wert in den Ausdruck.</p><p>Mit den Knöpfen in der Mitte setzt du <b>Operatoren</b> ein: <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>LIKE</code> (Textmuster mit <code>%</code>), <code>IN</code>, <code>AND</code>, <code>OR</code>, <code>NOT</code>.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsQueryBuilder",
+              "texts": [
+                "Alle",
+                "All"
+              ]
+            },
+            {
+              "type": "object",
+              "window": "QgsQueryBuilder",
+              "name": "lstValues"
+            },
+            {
+              "type": "window",
+              "window": "QgsQueryBuilder"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "helpers": [
+            "open_filter"
+          ],
+          "keywords": [
+            "werte",
+            "operatoren",
+            "like",
+            "and",
+            "or",
+            "in"
+          ]
+        },
+        {
+          "id": "filter.ausdruck",
+          "title": "Den Filter-Ausdruck schreiben",
+          "text": "<p>Unten steht der eigentliche <b>Filter-Ausdruck</b>. Beispiele für die Beispielstädte:</p><ul><li><code>\"typ\" = 'Metropole'</code></li><li><code>\"einwohner\" &gt; 500000</code></li><li><code>\"name\" LIKE 'D%'</code> – alles, was mit D anfängt</li><li><code>\"name\" IN ('Köln', 'Bonn')</code></li></ul><p>Feldnamen stehen in <b>doppelten</b>, Texte in <b>einfachen</b> Anführungszeichen. <b>Testen</b> zeigt, wie viele Objekte übrig bleiben, <b>OK</b> wendet den Filter an.</p>",
+          "targets": [
+            {
+              "type": "object",
+              "window": "QgsQueryBuilder",
+              "name": "mTxtSql"
+            },
+            {
+              "type": "class",
+              "window": "QgsQueryBuilder",
+              "name": "QgsCodeEditor"
+            },
+            {
+              "type": "class",
+              "window": "QgsQueryBuilder",
+              "name": "QTextEdit"
+            },
+            {
+              "type": "class",
+              "window": "QgsQueryBuilder",
+              "name": "QPlainTextEdit"
+            },
+            {
+              "type": "window",
+              "window": "QgsQueryBuilder"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Filtere die Beispielstädte so, dass nur die Metropolen übrig bleiben, und klick auf OK.",
+          "complete_on": {
+            "type": "layer_filtered"
+          },
+          "helpers": [
+            "open_filter"
+          ],
+          "keywords": [
+            "ausdruck",
+            "sql",
+            "where",
+            "bedingung",
+            "testen"
+          ]
+        },
+        {
+          "id": "filter.erkennen",
+          "title": "Gefilterte Layer erkennen und Filter entfernen",
+          "text": "<p>Ein gefilterter Layer hat im Layer-Bedienfeld ein <b>Trichter-Symbol</b>. Ein Klick darauf öffnet den Filter wieder. Rechtsklick → <i>Objektanzahl anzeigen</i> verrät, wie viele Objekte gerade sichtbar sind.</p><p>Zum Entfernen öffnest du den Filter, klickst auf <b>Löschen</b> und dann auf <b>OK</b>.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Entferne den Filter wieder.",
+          "complete_on": {
+            "type": "layer_filtered",
+            "state": false
+          },
+          "helpers": [
+            "open_filter",
+            "clear_filters"
+          ],
+          "keywords": [
+            "trichter",
+            "filter entfernen",
+            "filter löschen",
+            "objektanzahl"
+          ]
+        },
+        {
+          "id": "filter.tabelle",
+          "title": "Filter in der Attributtabelle",
+          "text": "<p>Auch die <b>Attributtabelle</b> kann filtern – unten links: <i>Alle Objekte anzeigen</i> → z.&nbsp;B. <i>Ausgewählte Objekte anzeigen</i> oder <i>Erweiterter Filter (Ausdruck)</i>.</p><p>Wichtig: Das betrifft <b>nur die Tabellenansicht</b>. Karte und Analysen sehen weiterhin alle Objekte. Wenn du Objekte per Ausdruck auswählen willst, nimm <b>Objekte über Ausdruck wählen</b> (Symbol mit ε).</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionOpenTable"
+            }
+          ],
+          "keywords": [
+            "attributtabelle filter",
+            "erweiterter filter",
+            "ausdruck wählen",
+            "select by expression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "darstellung",
+      "title": "Darstellung (Symbolisierung)",
+      "description": "Symbolisierung über das Layer-Gestaltungsbedienfeld",
+      "steps": [
+        {
+          "id": "darstellung.bedienfeld",
+          "title": "Das Layer-Gestaltungsbedienfeld",
+          "text": "<p>Das <b>Layer-Gestaltungsbedienfeld</b> (<b>F7</b>) ändert die Darstellung des aktiven Layers <i>live</i> – ohne Dialog, mit sofortiger Vorschau.</p><p>Du öffnest es mit <b>F7</b> oder über das Pinsel-Symbol oben im Layer-Bedienfeld.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "LayerStyling",
+              "ensure_visible": false
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Öffne das Layer-Gestaltungsbedienfeld (F7).",
+          "complete_on": {
+            "type": "dock_shown",
+            "name": "LayerStyling"
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "stil",
+            "symbolisierung",
+            "farbe",
+            "gestaltung",
+            "f7",
+            "style"
+          ]
+        },
+        {
+          "id": "darstellung.kategorisiert",
+          "title": "Nach Attribut einfärben",
+          "text": "<p>Oben im Bedienfeld wählst du die Art der Darstellung:</p><ul><li><b>Einzelsymbol</b> – alle Objekte gleich</li><li><b>Kategorisiert</b> – eine Farbe je Wert (z.&nbsp;B. Feld <i>typ</i>)</li><li><b>Abgestuft</b> – Farbverlauf/Größen nach Zahlenwerten (z.&nbsp;B. <i>einwohner</i>)</li><li><b>Regelbasiert</b> – eigene Regeln mit Ausdrücken</li></ul><p>Probier mal <i>Kategorisiert</i> mit dem Feld <i>typ</i> und klick auf <b>Klassifizieren</b>.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "keywords": [
+            "kategorisiert",
+            "abgestuft",
+            "klassifizieren",
+            "regelbasiert",
+            "farbverlauf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beschriftung",
+      "title": "Beschriftungen",
+      "description": "Objekte mit Text aus der Attributtabelle beschriften",
+      "steps": [
+        {
+          "id": "beschriftung.oeffnen",
+          "title": "Der Reiter „Beschriftungen“",
+          "text": "<p>Beschriftungen stellst du im <b>Layer-Gestaltungsbedienfeld</b> (<b>F7</b>) ein. Links am Rand gibt es dort mehrere Reiter mit Symbolen – der Reiter <b>Beschriftungen</b> hat das Symbol <b>abc</b>.</p><p>Dasselbe findest du auch in den Layereigenschaften (Doppelklick auf den Layer) unter <i>Beschriftungen</i>.</p>",
+          "targets": [
+            {
+              "type": "item",
+              "in_dock": "LayerStyling",
+              "texts": [
+                "Beschriftungen",
+                "Labels"
+              ],
+              "ensure_visible": false
+            },
+            {
+              "type": "dock",
+              "name": "LayerStyling",
+              "ensure_visible": false
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Öffne das Layer-Gestaltungsbedienfeld (F7) und wechsle zum Reiter „Beschriftungen“.",
+          "complete_on": {
+            "type": "dock_shown",
+            "name": "LayerStyling"
+          },
+          "helpers": [
+            "load_sample_points",
+            "open_styling"
+          ],
+          "keywords": [
+            "beschriftung",
+            "label",
+            "abc",
+            "reiter",
+            "f7"
+          ]
+        },
+        {
+          "id": "beschriftung.einschalten",
+          "title": "Beschriftung einschalten",
+          "text": "<p>Oben im Reiter steht zunächst <i>Keine Beschriftungen</i>. Stell auf <b>Einzelne Beschriftungen</b> um und wähl bei <b>Wert</b> das Feld, dessen Inhalt angezeigt werden soll – bei den Beispielstädten <i>name</i>.</p><p>Die Karte zeigt die Beschriftungen sofort an.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "in_dock": "LayerStyling",
+              "name": "QComboBox",
+              "texts": [
+                "Keine Beschriftungen",
+                "Einzelne Beschriftungen",
+                "No Labels",
+                "Single Labels"
+              ]
+            },
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "task": "Schalte die Beschriftung für die Beispielstädte mit dem Feld <i>name</i> ein.",
+          "complete_on": {
+            "type": "labels_enabled"
+          },
+          "helpers": [
+            "open_styling",
+            "enable_labels"
+          ],
+          "keywords": [
+            "einzelne beschriftungen",
+            "einschalten",
+            "feld",
+            "wert"
+          ]
+        },
+        {
+          "id": "beschriftung.text",
+          "title": "Text und Schrift",
+          "text": "<p>Statt eines einzelnen Felds kannst du über den <b>ε-Knopf</b> neben <i>Wert</i> auch einen <b>Ausdruck</b> verwenden, z.&nbsp;B.:</p><ul><li><code>\"name\" || ' (' || format_number(\"einwohner\", 0) || ')'</code></li><li><code>upper(\"name\")</code></li></ul><p>Im Unterreiter <b>Text</b> stellst du <b>Schriftart</b>, <b>Größe</b>, <b>Farbe</b> und Stil ein.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "in_dock": "LayerStyling",
+              "name": "QgsFieldExpressionWidget"
+            },
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "keywords": [
+            "schriftart",
+            "schriftgröße",
+            "farbe",
+            "ausdruck",
+            "text"
+          ]
+        },
+        {
+          "id": "beschriftung.puffer",
+          "title": "Puffer und Platzierung",
+          "text": "<p>Darunter gibt es weitere Unterreiter. Die wichtigsten:</p><ul><li><b>Puffer</b> – heller Rand um die Schrift (z.&nbsp;B. 1&nbsp;mm weiß). Macht Beschriftungen auf Luftbildern und Hintergrundkarten gut lesbar.</li><li><b>Hintergrund</b> – Kasten oder Form hinter dem Text</li><li><b>Platzierung</b> – bei Punkten z.&nbsp;B. <i>Um Punkt herum</i> oder mit Versatz; bei Linien entlang der Linie; bei Polygonen innen/horizontal</li><li><b>Darstellung</b> – nur in bestimmten Maßstäben anzeigen, Überlappungen erlauben</li></ul>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "keywords": [
+            "puffer",
+            "halo",
+            "hintergrund",
+            "platzierung",
+            "maßstab",
+            "überlappung"
+          ]
+        },
+        {
+          "id": "beschriftung.regeln",
+          "title": "Regelbasierte Beschriftung",
+          "text": "<p>Sollen verschiedene Objekte unterschiedlich beschriftet werden – z.&nbsp;B. Metropolen groß und fett, andere Städte kleiner –, wähl oben <b>Regelbasierte Beschriftung</b>.</p><p>Mit <b>+</b> legst du Regeln an, jeweils mit eigenem Filter (z.&nbsp;B. <code>\"typ\" = 'Metropole'</code>), eigenem Stil und optional eigenem Maßstabsbereich.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "keywords": [
+            "regelbasiert",
+            "regeln",
+            "unterschiedlich",
+            "maßstabsbereich"
+          ]
+        },
+        {
+          "id": "beschriftung.werkzeuge",
+          "title": "Beschriftungen von Hand verschieben",
+          "text": "<p>Die Werkzeugleiste <b>Beschriftung</b> enthält Werkzeuge, um einzelne Beschriftungen von Hand zu <b>verschieben</b>, zu <b>drehen</b>, <b>auszublenden</b> oder einzeln zu ändern – praktisch, wenn die automatische Platzierung nicht passt.</p><p>QGIS speichert diese Änderungen im <i>Hilfsdatenspeicher</i> des Projekts; deine Daten bleiben unverändert.</p>",
+          "targets": [
+            {
+              "type": "toolbar",
+              "name": "mLabelToolBar"
+            },
+            {
+              "type": "dock",
+              "name": "LayerStyling"
+            }
+          ],
+          "keywords": [
+            "verschieben",
+            "drehen",
+            "beschriftungswerkzeug",
+            "hilfsdatenspeicher",
+            "auxiliary"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eigene_layer",
+      "title": "Eigene Layer anlegen (GeoPackage & Shapefile)",
+      "description": "Neue, leere Layer erstellen, um selbst Daten zu erfassen",
+      "steps": [
+        {
+          "id": "eigene.format",
+          "title": "GeoPackage oder Shapefile?",
+          "text": "<p>Bevor du selbst Daten erfasst, brauchst du einen leeren Layer. Die beiden wichtigsten Formate:</p><ul><li><b>GeoPackage (.gpkg)</b> – <i>eine</i> Datei, die viele Layer (auch Tabellen und Stile) enthalten kann, lange Feldnamen, keine Größengrenze. <b>Das empfohlene Standardformat von QGIS.</b></li><li><b>Shapefile (.shp)</b> – sehr verbreitet und von fast jeder Software lesbar, aber: mehrere Dateien je Layer (.shp, .dbf, .shx, .prj …), Feldnamen maximal 10 Zeichen, max. 2&nbsp;GB, nur ein Geometrietyp.</li></ul><p>Faustregel: GeoPackage für die eigene Arbeit, Shapefile, wenn jemand ausdrücklich danach fragt.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "keywords": [
+            "geopackage",
+            "shapefile",
+            "format",
+            "gpkg",
+            "shp",
+            "unterschied"
+          ]
+        },
+        {
+          "id": "eigene.gpkg_oeffnen",
+          "title": "Neuen GeoPackage-Layer anlegen",
+          "text": "<p><i>Layer → Layer erstellen → <b>Neuer GeoPackage-Layer …</b></i> (<b>Strg + Umschalt + N</b>). Das gleiche Symbol findest du auch in der Werkzeugleiste <i>Datenquellenverwaltung</i> (Knopf mit dem kleinen Stern).</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionNewGeoPackageLayer"
+            },
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "task": "Öffne den Dialog „Neuer GeoPackage-Layer“.",
+          "complete_on": {
+            "type": "window_opened",
+            "window": "QgsNewGeoPackageLayerDialog"
+          },
+          "helpers": [
+            "open_new_gpkg"
+          ],
+          "keywords": [
+            "neuer layer",
+            "layer erstellen",
+            "geopackage anlegen",
+            "strg+umschalt+n"
+          ]
+        },
+        {
+          "id": "eigene.gpkg_datei",
+          "title": "Datei und Tabellenname",
+          "text": "<p>Bei <b>Datenbank</b> wählst du über <b>…</b> die GeoPackage-Datei – eine neue oder eine vorhandene. In eine vorhandene Datei wird der neue Layer einfach dazugelegt.</p><p>Der <b>Tabellenname</b> ist der Name des Layers innerhalb der Datei, z.&nbsp;B. <i>baeume</i>.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsNewGeoPackageLayerDialog",
+              "name": "QgsFileWidget"
+            },
+            {
+              "type": "window",
+              "window": "QgsNewGeoPackageLayerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionNewGeoPackageLayer"
+            },
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "helpers": [
+            "open_new_gpkg"
+          ],
+          "keywords": [
+            "datenbank",
+            "datei",
+            "tabellenname"
+          ]
+        },
+        {
+          "id": "eigene.gpkg_geometrie",
+          "title": "Geometrietyp und KBS",
+          "text": "<p>Beim <b>Geometrietyp</b> legst du fest, was du zeichnen willst: <i>Punkt</i>, <i>Linie</i> oder <i>Polygon</i> (oder <i>Keine Geometrie</i> für eine reine Tabelle). Z- und M-Werte brauchst du in der Regel nicht.</p><p>Darunter wählst du das <b>Koordinatenbezugssystem</b> – für Daten in NRW meist <b>EPSG:25832</b>. Später umprojizieren geht, ist aber unnötige Arbeit.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsNewGeoPackageLayerDialog",
+              "name": "QgsProjectionSelectionWidget"
+            },
+            {
+              "type": "window",
+              "window": "QgsNewGeoPackageLayerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionNewGeoPackageLayer"
+            },
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "helpers": [
+            "open_new_gpkg"
+          ],
+          "keywords": [
+            "geometrietyp",
+            "punkt",
+            "linie",
+            "polygon",
+            "kbs",
+            "epsg"
+          ]
+        },
+        {
+          "id": "eigene.gpkg_felder",
+          "title": "Felder anlegen",
+          "text": "<p>Unter <b>Neues Feld</b> legst du die Spalten deiner Attributtabelle an: <b>Name</b> eingeben, <b>Typ</b> wählen (Text, Ganzzahl, Dezimalzahl, Datum, Boolean …), bei Text ggf. die maximale Länge – dann <b>Zur Feldliste hinzufügen</b>.</p><p>Das Feld <i>fid</i> (eindeutige Nummer) legt QGIS automatisch an. Felder kannst du auch später noch in den Layereigenschaften ergänzen.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsNewGeoPackageLayerDialog",
+              "texts": [
+                "Zur Feldliste hinzufügen",
+                "Add to Fields List"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsNewGeoPackageLayerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionNewGeoPackageLayer"
+            },
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "helpers": [
+            "open_new_gpkg"
+          ],
+          "keywords": [
+            "felder",
+            "attribute",
+            "spalten",
+            "feldtyp",
+            "text",
+            "ganzzahl"
+          ]
+        },
+        {
+          "id": "eigene.gpkg_fertig",
+          "title": "Layer erstellen",
+          "text": "<p>Mit <b>OK</b> legt QGIS die Datei bzw. Tabelle an und fügt den neuen, noch leeren Layer zum Projekt hinzu.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsNewGeoPackageLayerDialog",
+              "texts": [
+                "OK"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsNewGeoPackageLayerDialog"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Leg einen GeoPackage-Layer an und bestätige mit OK.",
+          "complete_on": {
+            "type": "layer_added"
+          },
+          "helpers": [
+            "open_new_gpkg"
+          ],
+          "keywords": [
+            "ok",
+            "erstellen",
+            "anlegen"
+          ]
+        },
+        {
+          "id": "eigene.shp",
+          "title": "Neuen Shapefile-Layer anlegen",
+          "text": "<p>Für ein Shapefile: <i>Layer → Layer erstellen → <b>Neuer Shapedatei-Layer …</b></i>. Der Dialog ist ähnlich aufgebaut:</p><ul><li><b>Dateiname</b> über <b>…</b> wählen</li><li><b>Dateikodierung</b>: <i>UTF-8</i>, damit Umlaute richtig gespeichert werden</li><li><b>Geometrietyp</b> und <b>KBS</b> wie beim GeoPackage</li><li><b>Felder</b>: Namen höchstens <b>10 Zeichen</b> lang!</li></ul>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsNewVectorLayerDialog",
+              "name": "QgsFileWidget"
+            },
+            {
+              "type": "action",
+              "name": "actionNewVectorLayer"
+            },
+            {
+              "type": "menu",
+              "name": "mLayerMenu",
+              "titles": [
+                "Layer"
+              ]
+            }
+          ],
+          "task": "Leg testweise einen Shapefile-Layer an.",
+          "complete_on": {
+            "type": "layer_added"
+          },
+          "helpers": [
+            "open_new_shp"
+          ],
+          "keywords": [
+            "shapefile anlegen",
+            "shapedatei",
+            "neuer shapefile",
+            "kodierung",
+            "utf-8"
+          ]
+        },
+        {
+          "id": "eigene.weiter",
+          "title": "Daten in den neuen Layer zeichnen",
+          "text": "<p>Der neue Layer ist leer. Markier ihn im Layer-Bedienfeld, schalte den <b>Bearbeitungsmodus</b> ein und zeichne deine Objekte – wie genau, zeigt dir das nächste Thema <i>Daten bearbeiten</i>.</p><p>Tipp: Für schnelle Skizzen gibt es auch <i>Layer → Layer erstellen → Neuer temporärer Layer</i>. Der liegt nur im Arbeitsspeicher und lässt sich später exportieren.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionToggleEditing"
+            }
+          ],
+          "keywords": [
+            "zeichnen",
+            "erfassen",
+            "temporärer layer",
+            "scratch"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bearbeiten",
+      "title": "Daten bearbeiten",
+      "description": "Bearbeitungsmodus, Objekte digitalisieren, Feldrechner",
+      "steps": [
+        {
+          "id": "bearbeiten.modus",
+          "title": "Den Bearbeitungsmodus einschalten",
+          "text": "<p>Damit Daten nicht versehentlich geändert werden, musst du einen Layer erst in den <b>Bearbeitungsmodus</b> versetzen: Bleistift-Symbol bei aktivem Layer.</p><p>Im Layer-Bedienfeld erscheint dann ein Bleistift neben dem Layer, und die Digitalisierwerkzeuge werden aktiv.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionToggleEditing"
+            }
+          ],
+          "task": "Schalte den Bearbeitungsmodus für den Beispiel-Layer ein.",
+          "complete_on": {
+            "type": "editing_toggled",
+            "state": true
+          },
+          "helpers": [
+            "load_sample_points"
+          ],
+          "keywords": [
+            "bearbeiten",
+            "bleistift",
+            "editieren",
+            "edit"
+          ]
+        },
+        {
+          "id": "bearbeiten.hinzufuegen",
+          "title": "Objekte hinzufügen",
+          "text": "<p>Mit <b>Punktobjekt hinzufügen</b> (bei Linien/Polygonen entsprechend) klickst du in die Karte. Danach erscheint ein Formular für die Attribute.</p><p>Linien und Polygone schließt du mit einem <b>Rechtsklick</b> ab. <b>Strg + Z</b> macht den letzten Schritt rückgängig.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionAddFeature"
+            }
+          ],
+          "task": "Füg einen neuen Punkt hinzu und gib ihm einen Namen.",
+          "complete_on": {
+            "type": "map_tool",
+            "action": "actionAddFeature"
+          },
+          "keywords": [
+            "digitalisieren",
+            "hinzufügen",
+            "zeichnen",
+            "neues objekt",
+            "punkt",
+            "linie",
+            "polygon"
+          ]
+        },
+        {
+          "id": "bearbeiten.speichern",
+          "title": "Änderungen speichern",
+          "text": "<p>Änderungen werden erst mit <b>Layeränderungen speichern</b> in die Datenquelle geschrieben. Wenn du den Bearbeitungsmodus beendest, fragt QGIS, ob gespeichert oder verworfen werden soll.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionSaveActiveLayerEdits"
+            },
+            {
+              "type": "action",
+              "name": "actionToggleEditing"
+            }
+          ],
+          "task": "Beende den Bearbeitungsmodus und speicher dabei.",
+          "complete_on": {
+            "type": "editing_toggled",
+            "state": false
+          },
+          "keywords": [
+            "speichern",
+            "änderungen",
+            "verwerfen",
+            "beenden"
+          ]
+        },
+        {
+          "id": "bearbeiten.feldrechner",
+          "title": "Der Feldrechner",
+          "text": "<p>Mit dem <b>Feldrechner</b> (Abakus-Symbol, <b>Strg + I</b>) berechnest du Werte für ein neues oder bestehendes Feld mit <b>Ausdrücken</b>, z.&nbsp;B.:</p><ul><li><code>\"einwohner\" / 1000</code></li><li><code>upper(\"name\")</code></li><li><code>$area</code> für die Fläche von Polygonen</li></ul><p>Rechts im Dialog findest du alle Funktionen mit Hilfe.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionOpenFieldCalculator"
+            }
+          ],
+          "keywords": [
+            "feldrechner",
+            "ausdruck",
+            "berechnen",
+            "expression",
+            "abakus"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verarbeitung",
+      "title": "Analysen mit der Verarbeitungswerkzeugkiste",
+      "description": "Hunderte Analysewerkzeuge an einem Ort – am Beispiel Puffer",
+      "steps": [
+        {
+          "id": "verarbeitung.toolbox",
+          "title": "Die Verarbeitungswerkzeugkiste",
+          "text": "<p>Die <b>Verarbeitungswerkzeugkiste</b> (<b>Strg + Alt + T</b>) enthält Hunderte Werkzeuge: Puffer, Verschneiden, Auflösen, Rasteranalysen und vieles mehr.</p><p>Werkzeuge, die du kürzlich benutzt hast, stehen ganz oben unter <i>Zuletzt verwendet</i>.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "ProcessingToolbox"
+            }
+          ],
+          "keywords": [
+            "verarbeitung",
+            "processing",
+            "toolbox",
+            "werkzeugkiste",
+            "analyse"
+          ]
+        },
+        {
+          "id": "verarbeitung.suche",
+          "title": "Werkzeuge suchen",
+          "text": "<p>Am einfachsten findest du ein Werkzeug über das <b>Suchfeld</b> oben in der Werkzeugkiste. Schon nach wenigen Buchstaben werden die passenden Werkzeuge angezeigt.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "in_dock": "ProcessingToolbox",
+              "name": "QgsFilterLineEdit"
+            },
+            {
+              "type": "class",
+              "in_dock": "ProcessingToolbox",
+              "name": "QLineEdit"
+            },
+            {
+              "type": "dock",
+              "name": "ProcessingToolbox"
+            }
+          ],
+          "task": "Tipp <i>Puffer</i> in das Suchfeld.",
+          "complete_on": {
+            "type": "text_entered",
+            "in_dock": "ProcessingToolbox",
+            "texts": [
+              "puffer",
+              "buffer"
+            ]
+          },
+          "keywords": [
+            "suchen",
+            "werkzeug finden",
+            "filter"
+          ]
+        },
+        {
+          "id": "verarbeitung.puffer_finden",
+          "title": "Das Werkzeug öffnen",
+          "text": "<p>In der Ergebnisliste findest du <b>Vektorgeometrie → Puffer</b>. Ein <b>Doppelklick</b> öffnet den Werkzeugdialog.</p><p>Falls du nichts findest, nimm einfach den Knopf unten.</p>",
+          "targets": [
+            {
+              "type": "item",
+              "in_dock": "ProcessingToolbox",
+              "texts": [
+                "Puffer",
+                "Buffer"
+              ],
+              "depth": 4
+            },
+            {
+              "type": "dock",
+              "name": "ProcessingToolbox"
+            }
+          ],
+          "task": "Öffne das Werkzeug <i>Puffer</i> per Doppelklick.",
+          "complete_on": {
+            "type": "window_opened",
+            "window": "QgsProcessingAlgorithmDialogBase"
+          },
+          "helpers": [
+            "load_sample_points",
+            "open_buffer"
+          ],
+          "keywords": [
+            "puffer",
+            "buffer",
+            "umkreis",
+            "abstand"
+          ]
+        },
+        {
+          "id": "verarbeitung.puffer_parameter",
+          "title": "Parameter einstellen",
+          "text": "<p>Jedes Werkzeug hat links seine <b>Parameter</b>, rechts steht eine Hilfe dazu:</p><ul><li><i>Eingabelayer</i>: <b>Beispielstädte (Tour)</b></li><li><i>Abstand</i>: z.&nbsp;B. <b>0,1</b> – Achtung: Der Beispiel-Layer liegt in Grad vor (EPSG:4326), 0,1° sind etwa 7–11&nbsp;km. Bei metrischen Daten (EPSG:25832) gibst du direkt Meter ein.</li><li><i>Gepuffert</i>: leer lassen = temporärer Layer, oder <b>…</b> zum Speichern als Datei</li></ul>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsProcessingAlgorithmDialogBase",
+              "name": "QScrollArea"
+            },
+            {
+              "type": "window",
+              "window": "QgsProcessingAlgorithmDialogBase"
+            },
+            {
+              "type": "dock",
+              "name": "ProcessingToolbox"
+            }
+          ],
+          "helpers": [
+            "open_buffer"
+          ],
+          "keywords": [
+            "parameter",
+            "eingabelayer",
+            "abstand",
+            "einheit",
+            "grad"
+          ]
+        },
+        {
+          "id": "verarbeitung.puffer_start",
+          "title": "Werkzeug starten",
+          "text": "<p>Mit <b>Starten</b> läuft das Werkzeug. Im Reiter <i>Protokoll</i> siehst du, was passiert, und das Ergebnis wird als neuer Layer hinzugefügt.</p><p>Danach kannst du das Fenster schließen – oder mit anderen Parametern gleich noch einmal starten.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsProcessingAlgorithmDialogBase",
+              "texts": [
+                "Starten",
+                "Run"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsProcessingAlgorithmDialogBase"
+            },
+            {
+              "type": "dock",
+              "name": "ProcessingToolbox"
+            }
+          ],
+          "task": "Starte das Puffer-Werkzeug.",
+          "complete_on": {
+            "type": "layer_added"
+          },
+          "helpers": [
+            "open_buffer"
+          ],
+          "keywords": [
+            "starten",
+            "ausführen",
+            "run",
+            "protokoll",
+            "ergebnis"
+          ]
+        },
+        {
+          "id": "verarbeitung.historie",
+          "title": "Stapelverarbeitung und Historie",
+          "text": "<p>Jedes Werkzeug lässt sich auch als <b>Stapelprozess</b> für viele Dateien auf einmal ausführen (Knopf unten links im Werkzeugdialog).</p><p>Über <i>Verarbeitung → Historie</i> findest du alle bisherigen Aufrufe samt Parametern wieder. Mit dem <b>Modellierer</b> verknüpfst du mehrere Werkzeuge zu eigenen Arbeitsabläufen.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "processing",
+              "titles": [
+                "Verarbeitung",
+                "Processing"
+              ]
+            }
+          ],
+          "keywords": [
+            "stapel",
+            "batch",
+            "historie",
+            "modellierer",
+            "modell"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "title": "Daten exportieren",
+      "description": "Layer in andere Formate und Koordinatensysteme speichern",
+      "steps": [
+        {
+          "id": "export.speichern_als",
+          "title": "Objekte speichern als …",
+          "text": "<p>Um einen Layer in ein anderes Format zu bringen, z.&nbsp;B. für Kolleginnen und Kollegen oder ein GPS-Gerät: Rechtsklick auf den Layer → <b>Exportieren → Objekte speichern als …</b></p><p>So machst du auch einen <b>temporären Layer</b> dauerhaft.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Öffne „Objekte speichern als …“ für die Beispielstädte.",
+          "complete_on": {
+            "type": "window_opened",
+            "window": "QgsVectorLayerSaveAsDialog"
+          },
+          "helpers": [
+            "load_sample_points",
+            "open_save_as"
+          ],
+          "keywords": [
+            "export",
+            "exportieren",
+            "speichern als",
+            "save as",
+            "konvertieren"
+          ]
+        },
+        {
+          "id": "export.format",
+          "title": "Das Format wählen",
+          "text": "<p>Ganz oben wählst du das <b>Format</b>, z.&nbsp;B.:</p><ul><li><b>GeoPackage</b> – Standard für die Weiterarbeit in QGIS</li><li><b>ESRI Shapefile</b> – für ArcGIS und ältere Programme</li><li><b>GeoJSON</b> – für Webkarten</li><li><b>Keyhole Markup Language (KML)</b> – für Google Earth</li><li><b>AutoCAD DXF</b> – für CAD</li><li><b>Kommagetrennte Werte (CSV)</b> und <b>MS Office Open XML (XLSX)</b> – für Tabellenkalkulation</li></ul>",
+          "targets": [
+            {
+              "type": "object",
+              "window": "QgsVectorLayerSaveAsDialog",
+              "name": "mFormatComboBox"
+            },
+            {
+              "type": "class",
+              "window": "QgsVectorLayerSaveAsDialog",
+              "name": "QComboBox",
+              "texts": [
+                "GeoPackage",
+                "ESRI Shapefile"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsVectorLayerSaveAsDialog"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "helpers": [
+            "open_save_as"
+          ],
+          "keywords": [
+            "format",
+            "geojson",
+            "kml",
+            "dxf",
+            "csv",
+            "excel",
+            "xlsx"
+          ]
+        },
+        {
+          "id": "export.datei_kbs",
+          "title": "Dateiname und Koordinatensystem",
+          "text": "<p>Bei <b>Dateiname</b> wählst du über <b>…</b> Ordner und Namen. Bei GeoPackage gibst du zusätzlich einen <b>Layernamen</b> an.</p><p>Beim <b>KBS</b> kannst du die Daten beim Export <b>umprojizieren</b> – z.&nbsp;B. nach EPSG:4326 (WGS&nbsp;84) für GPS-Geräte und KML, oder nach EPSG:25832 für die Arbeit mit amtlichen Daten.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsVectorLayerSaveAsDialog",
+              "name": "QgsFileWidget"
+            },
+            {
+              "type": "window",
+              "window": "QgsVectorLayerSaveAsDialog"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "helpers": [
+            "open_save_as"
+          ],
+          "keywords": [
+            "dateiname",
+            "umprojizieren",
+            "kbs",
+            "wgs84",
+            "4326"
+          ]
+        },
+        {
+          "id": "export.optionen",
+          "title": "Nur Auswahl, Felder, zur Karte hinzufügen",
+          "text": "<p>Nützliche Optionen im Dialog:</p><ul><li><b>Nur gewählte Objekte speichern</b> – exportiert nur die gelb ausgewählten Objekte</li><li><b>Felder zum Exportieren auswählen</b> – unnötige Spalten weglassen</li><li><b>Gespeicherte Datei zur Karte hinzufügen</b> – lädt das Ergebnis direkt als neuen Layer</li></ul><p>Ein gesetzter <b>Filter</b> wird übrigens berücksichtigt – exportiert wird nur, was der Filter übrig lässt.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsVectorLayerSaveAsDialog",
+              "texts": [
+                "Nur gewählte Objekte speichern",
+                "Save only selected features"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsVectorLayerSaveAsDialog"
+            },
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "task": "Exportier die Beispielstädte als GeoPackage und bestätige mit OK.",
+          "complete_on": {
+            "type": "window_closed",
+            "window": "QgsVectorLayerSaveAsDialog"
+          },
+          "helpers": [
+            "open_save_as"
+          ],
+          "keywords": [
+            "nur ausgewählte",
+            "felder auswählen",
+            "zur karte hinzufügen",
+            "filter export"
+          ]
+        },
+        {
+          "id": "export.temporaer",
+          "title": "Temporäre Layer dauerhaft speichern",
+          "text": "<p>Temporäre Layer (Chip-Symbol im Layer-Bedienfeld) gehen beim Schließen von QGIS verloren. Ein Klick auf das <b>Chip-Symbol</b> öffnet direkt den Dialog <i>Temporären Layer dauerhaft speichern</i> – das Ergebnis ersetzt den temporären Layer im Projekt.</p>",
+          "targets": [
+            {
+              "type": "dock",
+              "name": "Layers"
+            }
+          ],
+          "keywords": [
+            "temporär",
+            "dauerhaft",
+            "chip",
+            "scratch",
+            "memory"
+          ]
+        },
+        {
+          "id": "export.karte",
+          "title": "Die Karte als Bild oder PDF exportieren",
+          "text": "<p>Für einen schnellen Screenshot der Kartenansicht: <i>Projekt → Importieren/Exportieren → <b>Karte als Bild exportieren …</b></i> bzw. <i>Karte als PDF exportieren …</i> – mit wählbarer Auflösung und Maßstab.</p><p>Für eine richtige Karte mit Legende, Maßstabsleiste und Titel nimmst du ein <b>Drucklayout</b> – siehe Thema <i>Karten drucken und exportieren</i>.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mProjectMenu",
+              "titles": [
+                "Projekt",
+                "Project"
+              ]
+            }
+          ],
+          "keywords": [
+            "karte als bild",
+            "png",
+            "pdf",
+            "screenshot",
+            "auflösung"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "title": "Karten drucken und exportieren",
+      "description": "Drucklayout mit Karte, Legende, Maßstab – im Layout-Fenster",
+      "steps": [
+        {
+          "id": "layout.neu",
+          "title": "Ein Drucklayout anlegen",
+          "text": "<p>Für Ausdrucke und PDFs erstellst du ein <b>Drucklayout</b>: <i>Projekt → Neues Drucklayout</i> (<b>Strg + P</b>). Ein Projekt kann beliebig viele Layouts enthalten.</p><p>Über die <b>Layoutverwaltung</b> (hervorgehoben) öffnest du vorhandene Layouts wieder. Mit dem Knopf unten legt die Tour dir direkt eins an.</p>",
+          "targets": [
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            },
+            {
+              "type": "menu",
+              "name": "mProjectMenu",
+              "titles": [
+                "Projekt",
+                "Project"
+              ]
+            }
+          ],
+          "task": "Erstell ein neues Drucklayout (Strg + P) mit einem beliebigen Namen.",
+          "complete_on": {
+            "type": "layout_opened"
+          },
+          "helpers": [
+            "open_layout"
+          ],
+          "keywords": [
+            "drucken",
+            "layout",
+            "pdf",
+            "druckzusammenstellung",
+            "strg+p",
+            "karte erstellen"
+          ]
+        },
+        {
+          "id": "layout.fenster",
+          "title": "Das Layout-Fenster",
+          "text": "<p>Das Layout öffnet sich in einem <b>eigenen Fenster</b>. In der Mitte siehst du das <b>Blatt</b> (standardmäßig A4 quer).</p><p>Navigieren funktioniert wie in der Karte: <b>Mausrad</b> zoomt, mit gedrückter <b>Leertaste</b> verschiebst du das Blatt. Die Seitengröße änderst du per Rechtsklick aufs Blatt → <i>Seiteneigenschaften</i>.</p>",
+          "targets": [
+            {
+              "type": "class",
+              "window": "QgsLayoutDesignerDialog",
+              "name": "QgsLayoutView"
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "helpers": [
+            "open_layout"
+          ],
+          "keywords": [
+            "layout-fenster",
+            "blatt",
+            "seite",
+            "a4",
+            "seitengröße"
+          ]
+        },
+        {
+          "id": "layout.karte",
+          "title": "Die Karte einfügen",
+          "text": "<p>Klick auf <b>Karte hinzufügen</b> und zieh dann auf dem Blatt ein <b>Rechteck</b> auf. Darin erscheint der aktuelle Kartenausschnitt aus dem Hauptfenster.</p><p>Den Ausschnitt innerhalb des Rahmens verschiebst du mit dem Werkzeug <i>Elementinhalt verschieben</i> (Taste <b>C</b>).</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsLayoutDesignerDialog",
+              "texts": [
+                "Karte hinzufügen",
+                "Add Map"
+              ]
+            },
+            {
+              "type": "toolbar",
+              "window": "QgsLayoutDesignerDialog",
+              "name": "mToolsToolbar"
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "task": "Füg eine Karte in das Layout ein.",
+          "complete_on": {
+            "type": "layout_item_added",
+            "item_type": "QgsLayoutItemMap"
+          },
+          "helpers": [
+            "open_layout"
+          ],
+          "keywords": [
+            "karte einfügen",
+            "kartenelement",
+            "rechteck",
+            "ausschnitt"
+          ]
+        },
+        {
+          "id": "layout.eigenschaften",
+          "title": "Elementeigenschaften",
+          "text": "<p>Rechts im Bedienfeld <b>Elementeigenschaften</b> passt du das gerade ausgewählte Element an. Bei der Karte z.&nbsp;B.:</p><ul><li><b>Maßstab</b> – fest einstellen, z.&nbsp;B. 1:50000</li><li><i>Ausdehnung auf Kartenansicht setzen</i> – übernimmt den Ausschnitt aus dem Hauptfenster</li><li><b>Gitter</b> – Koordinatengitter am Rand</li><li><b>Rahmen</b> und <b>Hintergrund</b></li></ul>",
+          "targets": [
+            {
+              "type": "dock",
+              "window": "QgsLayoutDesignerDialog",
+              "name": "ItemDock"
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "keywords": [
+            "elementeigenschaften",
+            "maßstab",
+            "gitter",
+            "rahmen",
+            "eigenschaften"
+          ],
+          "helpers": [
+            "open_layout"
+          ]
+        },
+        {
+          "id": "layout.legende",
+          "title": "Legende einfügen",
+          "text": "<p>Mit <b>Legende hinzufügen</b> ziehst du auch hier ein Rechteck auf. Die Legende übernimmt automatisch die Layer und Symbole.</p><p>In den Elementeigenschaften kannst du <i>Automatisch aktualisieren</i> ausschalten und dann einzelne Einträge umbenennen oder entfernen – z.&nbsp;B. die Hintergrundkarte.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsLayoutDesignerDialog",
+              "texts": [
+                "Legende hinzufügen",
+                "Add Legend"
+              ]
+            },
+            {
+              "type": "toolbar",
+              "window": "QgsLayoutDesignerDialog",
+              "name": "mToolsToolbar"
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "task": "Füg eine Legende ein.",
+          "complete_on": {
+            "type": "layout_item_added",
+            "item_type": "QgsLayoutItemLegend"
+          },
+          "keywords": [
+            "legende",
+            "legend",
+            "symbole"
+          ],
+          "helpers": [
+            "open_layout"
+          ]
+        },
+        {
+          "id": "layout.massstab",
+          "title": "Maßstabsleiste und Nordpfeil",
+          "text": "<p>Eine Karte braucht meist noch eine <b>Maßstabsleiste</b> und einen <b>Nordpfeil</b>. Beide findest du in derselben Werkzeugleiste (bzw. im Menü <i>Hinzufügen</i>).</p><p>Für einen <b>Titel</b> nimmst du <i>Beschriftung hinzufügen</i>.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsLayoutDesignerDialog",
+              "texts": [
+                "Maßstabsleiste hinzufügen",
+                "Add Scale Bar"
+              ]
+            },
+            {
+              "type": "toolbar",
+              "window": "QgsLayoutDesignerDialog",
+              "name": "mToolsToolbar"
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "task": "Füg eine Maßstabsleiste ein.",
+          "complete_on": {
+            "type": "layout_item_added",
+            "item_type": "QgsLayoutItemScaleBar"
+          },
+          "keywords": [
+            "maßstabsleiste",
+            "nordpfeil",
+            "titel",
+            "beschriftung",
+            "scale bar"
+          ],
+          "helpers": [
+            "open_layout"
+          ]
+        },
+        {
+          "id": "layout.export",
+          "title": "Als PDF oder Bild exportieren",
+          "text": "<p>Fertig? Über <b>Als PDF exportieren</b> (oder <i>Layout → Als PDF exportieren</i>) speicherst du die Karte. Daneben gibt es den Export als Bild (PNG/JPG) und als SVG sowie den direkten Druck.</p><p>Das Layout wird mit dem Projekt gespeichert – du kannst es also jederzeit wieder öffnen und anpassen.</p>",
+          "targets": [
+            {
+              "type": "button",
+              "window": "QgsLayoutDesignerDialog",
+              "texts": [
+                "Als PDF exportieren",
+                "Export as PDF"
+              ]
+            },
+            {
+              "type": "menu",
+              "window": "QgsLayoutDesignerDialog",
+              "titles": [
+                "Layout"
+              ]
+            },
+            {
+              "type": "window",
+              "window": "QgsLayoutDesignerDialog"
+            },
+            {
+              "type": "action",
+              "name": "actionShowLayoutManager"
+            }
+          ],
+          "keywords": [
+            "export",
+            "pdf",
+            "png",
+            "bild",
+            "drucken",
+            "speichern"
+          ],
+          "helpers": [
+            "open_layout"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "erweiterungen",
+      "title": "Erweiterungen und Hilfe",
+      "description": "Plugins, Einstellungen und wo du Hilfe findest",
+      "steps": [
+        {
+          "id": "erweiterungen.plugins",
+          "title": "Erweiterungen (Plugins)",
+          "text": "<p>QGIS lässt sich mit über tausend <b>Erweiterungen</b> ergänzen – z.&nbsp;B. <i>QuickMapServices</i> für Hintergrundkarten oder <i>Plugin Reloader</i> für Entwickler.</p><p>Unter <i>Erweiterungen → Erweiterungen verwalten und installieren …</i> suchst, installierst und aktualisierst du Plugins. Diese Tour ist übrigens selbst ein Plugin.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mPluginMenu",
+              "titles": [
+                "Erweiterungen",
+                "Plugins"
+              ]
+            }
+          ],
+          "keywords": [
+            "plugin",
+            "erweiterung",
+            "installieren",
+            "quickmapservices"
+          ]
+        },
+        {
+          "id": "erweiterungen.einstellungen",
+          "title": "Oberfläche anpassen",
+          "text": "<p>Unter <i>Einstellungen → Optionen</i> findest du z.&nbsp;B. Sprache, Standard-KBS, Schriftgröße der Oberfläche und Proxy. Über <i>Ansicht → Bedienfelder</i> bzw. <i>Ansicht → Werkzeugleisten</i> blendest du Bereiche ein und aus.</p><p>Falls die Oberfläche mal „durcheinander“ ist: Unter <i>Einstellungen → Benutzerprofile</i> kannst du getrennte Profile anlegen, z.&nbsp;B. eins zum Experimentieren.</p>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mSettingsMenu",
+              "titles": [
+                "Einstellungen",
+                "Settings"
+              ]
+            }
+          ],
+          "keywords": [
+            "einstellungen",
+            "optionen",
+            "sprache",
+            "profil",
+            "proxy",
+            "bedienfelder",
+            "schriftgröße"
+          ]
+        },
+        {
+          "id": "erweiterungen.hilfe",
+          "title": "Wo finde ich Hilfe?",
+          "text": "<p>In fast jedem Dialog öffnet <b>F1</b> bzw. die Schaltfläche <i>Hilfe</i> die passende Seite im Benutzerhandbuch.</p><p>Das <b>Hilfe</b>-Menü führt zum Handbuch und zu dieser Tour. Die Tour findest du außerdem jederzeit über das Kompass-Symbol in der Werkzeugleiste.</p><ul><li><a href='https://docs.qgis.org/latest/de/docs/user_manual/'>Benutzerhandbuch (deutsch)</a></li><li><a href='https://gis.stackexchange.com/questions/tagged/qgis'>Fragen &amp; Antworten auf GIS StackExchange</a></li></ul>",
+          "targets": [
+            {
+              "type": "menu",
+              "name": "mHelpMenu",
+              "titles": [
+                "Hilfe",
+                "Help"
+              ]
+            }
+          ],
+          "keywords": [
+            "hilfe",
+            "f1",
+            "handbuch",
+            "dokumentation",
+            "support"
+          ]
+        }
+      ]
+    }
+  ]
+}

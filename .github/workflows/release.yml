@@ -1,0 +1,54 @@
+name: Build plugin package
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PLUGIN_DIR: guided_tour
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Read version from metadata.txt
+        id: meta
+        run: |
+          version=$(sed -n 's/^version=//p' metadata.txt | tr -d '[:space:]')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check that the tag matches metadata.txt
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          if [ "${GITHUB_REF_NAME#v}" != "${{ steps.meta.outputs.version }}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match version ${{ steps.meta.outputs.version }} in metadata.txt" >&2
+            exit 1
+          fi
+
+      - name: Build ZIP
+        run: |
+          git archive --format=zip --prefix="${PLUGIN_DIR}/" \
+            -o "${PLUGIN_DIR}-${{ steps.meta.outputs.version }}.zip" HEAD
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PLUGIN_DIR }}-${{ steps.meta.outputs.version }}
+          path: ${{ env.PLUGIN_DIR }}-${{ steps.meta.outputs.version }}.zip
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            "${PLUGIN_DIR}-${{ steps.meta.outputs.version }}.zip" \
+            --title "Guided Tour ${{ steps.meta.outputs.version }}" \
+            --generate-notes

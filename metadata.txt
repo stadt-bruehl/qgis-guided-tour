@@ -1,0 +1,20 @@
+[general]
+name=Guided Tour
+qgisMinimumVersion=3.22
+qgisMaximumVersion=3.99
+supportsQt6=True
+description=Interactive guided tour through the QGIS user interface
+about=Guides new users step by step through the most important elements of QGIS. The elements are highlighted and explained directly in the interface, and small tasks are detected automatically. All topics remain available in the dock widget as a reference after the tour. The tour content is currently available in German only.
+version=0.0.1
+author=Martin Reger
+email=mreger@bruehl.de
+tags=tutorial,help,introduction,onboarding,training,tour
+homepage=https://github.com/stadt-bruehl/qgis-guided-tour
+tracker=https://github.com/stadt-bruehl/qgis-guided-tour/issues
+repository=https://github.com/stadt-bruehl/qgis-guided-tour
+icon=icons/icon.svg
+experimental=True
+deprecated=False
+hasProcessingProvider=no
+changelog=
+    0.0.1 - Initial open-source release
