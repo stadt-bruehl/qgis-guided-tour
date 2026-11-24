@@ -5,7 +5,7 @@ qgisMaximumVersion=3.99
 supportsQt6=True
 description=Interactive guided tour through the QGIS user interface
 about=Guides new users step by step through the most important elements of QGIS. The elements are highlighted and explained directly in the interface, and small tasks are detected automatically. All topics remain available in the dock widget as a reference after the tour. The tour content is currently available in German only.
-version=0.0.1
+version=0.0.2
 author=Martin Reger
 email=mreger@bruehl.de
 tags=tutorial,help,introduction,onboarding,training,tour
@@ -17,4 +17,5 @@ experimental=True
 deprecated=False
 hasProcessingProvider=no
 changelog=
+    0.0.2 - UI translations (English/German), navigation buttons stay visible on small screens
     0.0.1 - Initial open-source release
