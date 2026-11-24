@@ -1,4 +1,4 @@
-# Guided Tour – QGIS plugin (0.0.1)
+# Guided Tour – QGIS plugin (0.0.2)
 
 Interactive introduction to the QGIS user interface as a dock widget. UI elements are
 highlighted directly in the QGIS window (spotlight with an orange frame) – also in dialogs
@@ -16,7 +16,7 @@ Download `guided_tour-<version>.zip` from the
 experimental, so enable *Show also experimental plugins* in the settings if it does not appear.
 
 Releases are built by a GitHub Actions workflow when a tag `v<version>` is pushed
-(for example `v0.0.1`; the tag must match `version` in `metadata.txt`).
+(for example `v0.0.2`; the tag must match `version` in `metadata.txt`).
 
 ## Installation for development
 
