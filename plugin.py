@@ -8,7 +8,9 @@ from qgis.PyQt.QtCore import Qt, QTimer
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QApplication
 
+from . import translate
 from .compat import QAction
+from .translate import tr
 from .companion import ModalCompanion
 from .content import load_tours
 from .engine import TourEngine
@@ -34,15 +36,16 @@ class GuidedTourPlugin:
 
     def initGui(self):  # noqa: N802
         # load the content first: if it fails, nothing has been registered yet
+        translate.install(self.plugin_dir)
         self.progress = Progress()
         self.tours = load_tours(self.plugin_dir)
         last = get_value("current_tour", "")
         self.content = next((t for t in self.tours if t.id == last), self.tours[0])
 
         icon = QIcon(os.path.join(self.plugin_dir, "icons", "icon.svg"))
-        self.action = QAction(icon, "Guided Tour through QGIS", self.iface.mainWindow())
+        self.action = QAction(icon, tr("Guided Tour through QGIS"), self.iface.mainWindow())
         self.action.setCheckable(True)
-        self.action.setToolTip("Guided Tour: get to know QGIS step by step")
+        self.action.setToolTip(tr("Guided Tour: get to know QGIS step by step"))
         self.action.toggled.connect(self._toggle_dock)
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(MENU, self.action)
@@ -121,6 +124,7 @@ class GuidedTourPlugin:
             self.dock.close()
 
     def unload(self):
+        translate.remove()
         if getattr(self, "companion", None) is not None:
             self.companion.cleanup()
             self.companion = None

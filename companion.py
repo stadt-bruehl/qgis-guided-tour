@@ -24,6 +24,7 @@ from qgis.PyQt.QtWidgets import (
 )
 
 from . import helpers
+from .translate import tr
 
 PANEL_WIDTH = 360
 
@@ -44,7 +45,7 @@ class CompanionPanel(QFrame):
         super().__init__(host, Qt.WindowType.Tool | Qt.WindowType.WindowTitleHint
                          | Qt.WindowType.CustomizeWindowHint)
         self.setObjectName("tourCompanion")
-        self.setWindowTitle("Guided Tour")
+        self.setWindowTitle(tr("Guided Tour"))
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, False)
         self.companion = companion
         self.setFixedWidth(PANEL_WIDTH)
@@ -53,7 +54,7 @@ class CompanionPanel(QFrame):
         lay.setContentsMargins(0, 0, 0, 6)
         lay.setSpacing(4)
 
-        head = QLabel("Guided Tour – continue here while this dialog is open")
+        head = QLabel(tr("Guided Tour – continue here while this dialog is open"))
         head.setObjectName("companionHead")
         head.setWordWrap(True)
         lay.addWidget(head)
@@ -75,7 +76,7 @@ class CompanionPanel(QFrame):
         self.btn_toggle.setAutoRaise(True)
         self.btn_toggle.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
         self.btn_toggle.setArrowType(Qt.ArrowType.DownArrow)
-        self.btn_toggle.setText("Explanation")
+        self.btn_toggle.setText(tr("Explanation"))
         bl.addWidget(self.btn_toggle)
 
         self.text = QTextBrowser()
@@ -100,9 +101,9 @@ class CompanionPanel(QFrame):
         bl.addLayout(self.helper_box)
 
         nav = QHBoxLayout()
-        self.btn_prev = QPushButton("◀ Back")
-        self.btn_show = QPushButton("Show")
-        self.btn_next = QPushButton("Next ▶")
+        self.btn_prev = QPushButton(tr("◀ Back"))
+        self.btn_show = QPushButton(tr("Show"))
+        self.btn_next = QPushButton(tr("Next ▶"))
         self.btn_next.setDefault(False)
         self.btn_next.setAutoDefault(False)  # keep Enter inside the dialog (e.g. OK)
         for b in (self.btn_prev, self.btn_show):
@@ -133,15 +134,15 @@ class CompanionPanel(QFrame):
 
     def show_step(self, step, index, count, mode_full, topic_title, status):
         self.lbl_context.setText(
-            ("Complete tour · " if mode_full else "") + "Step {} of {} · {}".format(index + 1, count, topic_title)
+            (tr("Complete tour · ") if mode_full else "") + tr("Step {} of {} · {}").format(index + 1, count, topic_title)
         )
         self.lbl_title.setText(step.title)
         self.text.setHtml(step.text)
         self.task.setVisible(bool(step.task))
-        self.lbl_task.setText("<b>Your task:</b> " + step.task if step.task else "")
+        self.lbl_task.setText(tr("<b>Your task:</b> {}").format(step.task) if step.task else "")
         self.set_status(status)
         self.btn_prev.setEnabled(index > 0)
-        self.btn_next.setText("Done ✓" if index + 1 >= count else "Next ▶")
+        self.btn_next.setText(tr("Done ✓") if index + 1 >= count else tr("Next ▶"))
         while self.helper_box.count():
             w = self.helper_box.takeAt(0).widget()
             if w is not None:
@@ -157,9 +158,9 @@ class CompanionPanel(QFrame):
 
     def set_status(self, status):
         if status == "waiting":
-            self.lbl_status.setText("⏳ Waiting for you … (or click “Next”)")
+            self.lbl_status.setText(tr("⏳ Waiting for you … (or click “Next”)"))
         elif status == "done":
-            self.lbl_status.setText("<b style='color:#1e7d32'>✓ Great, done!</b>")
+            self.lbl_status.setText(tr("<b style='color:#1e7d32'>✓ Great, done!</b>"))
         else:
             self.lbl_status.setText("")
 

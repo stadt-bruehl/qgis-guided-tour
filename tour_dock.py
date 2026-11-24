@@ -17,6 +17,7 @@ from qgis.PyQt.QtWidgets import (
     QMessageBox,
     QProgressBar,
     QPushButton,
+    QScrollArea,
     QSizePolicy,
     QSplitter,
     QTextBrowser,
@@ -30,6 +31,7 @@ from qgis.PyQt.QtWidgets import (
 from . import helpers
 from .engine import MODE_FULL
 from .progress import get_bool, set_value
+from .translate import tr
 
 ROLE = Qt.ItemDataRole.UserRole
 
@@ -72,7 +74,7 @@ class TourDock(QgsDockWidget):
     fontScaleChanged = pyqtSignal(float)
 
     def __init__(self, iface, engine, content, progress, tours=None):
-        super().__init__("Guided Tour", iface.mainWindow())
+        super().__init__(tr("Guided Tour"), iface.mainWindow())
         self.setObjectName("GuidedTourDock")
         self.setMinimumWidth(300)
         self.iface = iface
@@ -109,9 +111,9 @@ class TourDock(QgsDockWidget):
         self.tour_row = QWidget()
         trl = QHBoxLayout(self.tour_row)
         trl.setContentsMargins(0, 0, 0, 0)
-        trl.addWidget(QLabel("Tour:"))
+        trl.addWidget(QLabel(tr("Tour:")))
         self.tour_combo = QComboBox()
-        self.tour_combo.setToolTip("Which tour would you like to see?")
+        self.tour_combo.setToolTip(tr("Which tour would you like to see?"))
         for tour in self.tours:
             self.tour_combo.addItem(tour.title, tour.id)
         self.tour_combo.setCurrentIndex(max(0, self.tour_combo.findData(self.content.id)))
@@ -131,17 +133,17 @@ class TourDock(QgsDockWidget):
         tl = QVBoxLayout(top)
         tl.setContentsMargins(0, 0, 0, 0)
         self.search = QLineEdit()
-        self.search.setPlaceholderText("Search for a topic or keyword …")
+        self.search.setPlaceholderText(tr("Search for a topic or keyword …"))
         self.search.setClearButtonEnabled(True)
         tl.addWidget(self.search)
         self.tree = QTreeWidget()
         self.tree.setHeaderHidden(True)
-        self.tree.setToolTip("Double-click a topic or step to open the explanation.")
-        self.tree.setMinimumHeight(100)
+        self.tree.setToolTip(tr("Double-click a topic or step to open the explanation."))
+        self.tree.setMinimumHeight(60)
         tl.addWidget(self.tree, 1)
         row = QHBoxLayout()
-        self.btn_full = QPushButton("Start complete tour")
-        self.btn_topic = QPushButton("Selected topic")
+        self.btn_full = QPushButton(tr("Start complete tour"))
+        self.btn_topic = QPushButton(tr("Selected topic"))
         self.btn_topic.setEnabled(False)
         row.addWidget(self.btn_full)
         row.addWidget(self.btn_topic)
@@ -163,7 +165,7 @@ class TourDock(QgsDockWidget):
 
         self.text = QTextBrowser()
         self.text.setOpenExternalLinks(True)
-        self.text.setMinimumHeight(90)
+        self.text.setMinimumHeight(60)
         bl.addWidget(self.text, 1)
 
         self.task_frame = QFrame()
@@ -179,9 +181,9 @@ class TourDock(QgsDockWidget):
         bl.addWidget(self.task_frame)
 
         self.lbl_missing = QLabel(
-            "<i>This UI element is not visible right now – maybe the window is "
-            "not open yet, it is hidden, or your QGIS version looks slightly different. "
-            "The explanation still applies.</i>"
+            tr("<i>This UI element is not visible right now – maybe the window is "
+               "not open yet, it is hidden, or your QGIS version looks slightly different. "
+               "The explanation still applies.</i>")
         )
         self.lbl_missing.setWordWrap(True)
         self.lbl_missing.setVisible(False)
@@ -195,40 +197,46 @@ class TourDock(QgsDockWidget):
         self.nav = QWidget()
         nl = QHBoxLayout(self.nav)
         nl.setContentsMargins(0, 0, 0, 0)
-        self.btn_prev = QPushButton("◀ Back")
-        self.btn_show = QPushButton("Show")
-        self.btn_show.setToolTip("Highlight the UI element again")
-        self.btn_next = QPushButton("Next ▶")
+        self.btn_prev = QPushButton(tr("◀ Back"))
+        self.btn_show = QPushButton(tr("Show"))
+        self.btn_show.setToolTip(tr("Highlight the UI element again"))
+        self.btn_next = QPushButton(tr("Next ▶"))
         self.btn_next.setDefault(True)
         self.btn_stop = QToolButton()
         self.btn_stop.setText("✕")
-        self.btn_stop.setToolTip("End tour")
+        self.btn_stop.setToolTip(tr("End tour"))
         for b in (self.btn_prev, self.btn_show, self.btn_next):
             b.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             nl.addWidget(b)
         nl.addWidget(self.btn_stop)
-        bl.addWidget(self.nav)
-        splitter.addWidget(bottom)
+        # the lower pane scrolls on small screens; the navigation stays pinned below the splitter
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setWidget(bottom)
+        splitter.addWidget(scroll)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 2)
         splitter.setChildrenCollapsible(False)
 
+        lay.addWidget(self.nav)
+
         # --- options
         opts = QHBoxLayout()
-        self.chk_dim = QCheckBox("Dim surroundings")
+        self.chk_dim = QCheckBox(tr("Dim surroundings"))
         self.chk_dim.setChecked(self.engine.overlay.dim)
-        self.chk_auto = QCheckBox("Advance automatically")
-        self.chk_auto.setToolTip("Switch to the next step automatically after a task is completed")
+        self.chk_auto = QCheckBox(tr("Advance automatically"))
+        self.chk_auto.setToolTip(tr("Switch to the next step automatically after a task is completed"))
         self.chk_auto.setChecked(self.engine.auto_advance)
         self.btn_reset = QToolButton()
-        self.btn_reset.setText("Reset progress")
+        self.btn_reset.setText(tr("Reset progress"))
         self.btn_reset.setAutoRaise(True)
         self.btn_smaller = QToolButton()
         self.btn_smaller.setText("A−")
-        self.btn_smaller.setToolTip("Smaller font")
+        self.btn_smaller.setToolTip(tr("Smaller font"))
         self.btn_bigger = QToolButton()
         self.btn_bigger.setText("A+")
-        self.btn_bigger.setToolTip("Larger font")
+        self.btn_bigger.setToolTip(tr("Larger font"))
         opts.addWidget(self.chk_dim)
         opts.addWidget(self.chk_auto)
         opts.addStretch(1)
@@ -238,8 +246,8 @@ class TourDock(QgsDockWidget):
         reset_row = QHBoxLayout()
         self.btn_window = QToolButton()
         self.btn_window.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextOnly)
-        self.chk_on_top = QCheckBox("Always on top")
-        self.chk_on_top.setToolTip("The tour window stays above QGIS, even when you click into the main window")
+        self.chk_on_top = QCheckBox(tr("Always on top"))
+        self.chk_on_top.setToolTip(tr("The tour window stays above QGIS, even when you click into the main window"))
         self.chk_on_top.setChecked(get_bool("window_on_top", False))
         reset_row.addWidget(self.btn_window)
         reset_row.addWidget(self.chk_on_top)
@@ -317,13 +325,13 @@ class TourDock(QgsDockWidget):
         self._set_step_mode(False)
         self._refresh_progress()
         if mode == MODE_FULL:
-            self.lbl_title.setText("Done! 🎉")
+            self.lbl_title.setText(tr("Done! 🎉"))
             self.text.setHtml(self.content.finished)
         else:
-            self.lbl_title.setText("Topic completed")
+            self.lbl_title.setText(tr("Topic completed"))
             self.text.setHtml(
-                "<p>You have completed this topic. Pick another topic above "
-                "or continue the complete tour.</p>"
+                tr("<p>You have completed this topic. Pick another topic above "
+                   "or continue the complete tour.</p>")
             )
         self._update_start_button()
 
@@ -332,19 +340,19 @@ class TourDock(QgsDockWidget):
         topic = self.content.topic(step.topic_id)
         topic_title = topic.title if topic else ""
         if self.engine.mode == MODE_FULL:
-            self.lbl_context.setText("Complete tour · Step {} of {} · {}".format(index + 1, count, topic_title))
+            self.lbl_context.setText(tr("Complete tour · Step {} of {} · {}").format(index + 1, count, topic_title))
         else:
-            self.lbl_context.setText("{} · Step {} of {}".format(topic_title, index + 1, count))
+            self.lbl_context.setText(tr("{} · Step {} of {}").format(topic_title, index + 1, count))
         self.lbl_title.setText(step.title)
         self.text.setHtml(step.text)
         self.lbl_missing.setVisible(False)
 
         self.task_frame.setVisible(bool(step.task))
-        self.lbl_task.setText("<b>Your task:</b> " + step.task if step.task else "")
+        self.lbl_task.setText(tr("<b>Your task:</b> {}").format(step.task) if step.task else "")
         self._set_helpers(step.helpers)
 
         self.btn_prev.setEnabled(index > 0)
-        self.btn_next.setText("Done ✓" if index + 1 >= count else "Next ▶")
+        self.btn_next.setText(tr("Done ✓") if index + 1 >= count else tr("Next ▶"))
 
         item = self._step_items.get(step.id)
         if item is not None:
@@ -355,9 +363,9 @@ class TourDock(QgsDockWidget):
 
     def _on_status(self, step_id, status):
         if status == "waiting":
-            self.lbl_status.setText("⏳ Waiting for you … (you can also just click “Next”)")
+            self.lbl_status.setText(tr("⏳ Waiting for you … (you can also just click “Next”)"))
         elif status == "done":
-            self.lbl_status.setText("<b style='color:#1e7d32'>✓ Great, done!</b>")
+            self.lbl_status.setText(tr("<b style='color:#1e7d32'>✓ Great, done!</b>"))
         else:
             self.lbl_status.setText("")
         self._refresh_progress()
@@ -383,7 +391,7 @@ class TourDock(QgsDockWidget):
         done = self.progress.count(all_ids)
         self.progress_bar.setRange(0, max(1, len(all_ids)))
         self.progress_bar.setValue(done)
-        self.progress_bar.setFormat("{} of {} steps completed".format(done, len(all_ids)))
+        self.progress_bar.setFormat(tr("{} of {} steps completed").format(done, len(all_ids)))
         for topic in self.content.topics:
             ids = [s.id for s in topic.steps]
             n = self.progress.count(ids)
@@ -399,11 +407,11 @@ class TourDock(QgsDockWidget):
         all_ids = [s.id for s in self.content.all_steps()]
         done = self.progress.count(all_ids)
         if done == 0:
-            self.btn_full.setText("Start complete tour")
+            self.btn_full.setText(tr("Start complete tour"))
         elif done < len(all_ids):
-            self.btn_full.setText("Continue tour")
+            self.btn_full.setText(tr("Continue tour"))
         else:
-            self.btn_full.setText("Repeat tour")
+            self.btn_full.setText(tr("Repeat tour"))
 
     # ------------------------------------------------------------ tour selection
     def select_tour(self, tour_id):
@@ -495,8 +503,8 @@ class TourDock(QgsDockWidget):
     def _reset_progress(self):
         answer = QMessageBox.question(
             self,
-            "Reset progress",
-            "Mark all steps of the tour “{}” as “open” again?".format(self.content.title),
+            tr("Reset progress"),
+            tr("Mark all steps of the tour “{}” as “open” again?").format(self.content.title),
         )
         if answer == QMessageBox.StandardButton.Yes:
             self.progress.reset([s.id for s in self.content.all_steps()])
@@ -538,7 +546,7 @@ class TourDock(QgsDockWidget):
             return
         was_visible = self.isVisible()  # setWindowFlags() hides the window
         self.setWindowFlags(self._window_flags())
-        self.setWindowTitle("Guided Tour – QGIS")
+        self.setWindowTitle(tr("Guided Tour – QGIS"))
         icon = self.iface.mainWindow().windowIcon()
         if not icon.isNull():
             self.setWindowIcon(icon)
@@ -556,11 +564,11 @@ class TourDock(QgsDockWidget):
 
     def _update_window_button(self):
         floating = self.isFloating()
-        self.btn_window.setText("⇤ Dock" if floating else "⧉ Separate window")
+        self.btn_window.setText(tr("⇤ Dock") if floating else tr("⧉ Separate window"))
         self.btn_window.setToolTip(
-            "Dock back into the QGIS window"
+            tr("Dock back into the QGIS window")
             if floating
-            else "Open as a separate window – e.g. to drag it to a second screen"
+            else tr("Open as a separate window – e.g. to drag it to a second screen")
         )
         self.chk_on_top.setVisible(floating)
 

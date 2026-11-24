@@ -42,6 +42,7 @@ in the toolbar or *Help → Guided Tour through QGIS*.
 | `highlight.py` | Spotlight overlay (transparent to mouse events), one overlay per window/dialog |
 | `watchers.py` | Task detection via QGIS signals (layer added, tool active, …) |
 | `helpers.py` | Buttons such as “Load OpenStreetMap background”, “Create sample point layer”, “Open buffer tool”, “Open new print layout”, “Open filter dialog for the layer”, “Create new GeoPackage layer”, “Open ‘Save Features As …’”, “Enable labeling automatically” |
+| `translate.py` | UI translation (loads `i18n/guided_tour_<lang>.qm` for the QGIS/system language) |
 | `progress.py` | Progress/options in the QGIS settings (`guided_tour/…`) |
 | `content/tour_de.json` | **All texts** (informal German “Du” form): 15 topics, 82 steps |
 
@@ -65,6 +66,18 @@ Further target types: `item` (entry in a list/tree by text), `button` (button by
 `text_entered`, `layout_item_added`, `layer_filtered`, `labels_enabled`.
 `class` targets can additionally have `texts` (e.g. the combo box “Single Labels”),
 `item` targets also find entries via their tooltip (icon tabs without text).
+
+## Translations of the user interface
+
+The UI language follows the QGIS language (*Settings → Options → General*) or the system
+language. English is the source language; German is included. Tour content has its own files
+(see above).
+
+- Strings in code are wrapped in `tr("…")` (`translate.py`).
+- Translations live in `tools/translations/<lang>.json` (`{"English text": "translation"}`).
+- Run `python3 tools/build_translations.py` (needs Qt's `lrelease`) to write
+  `i18n/guided_tour_<lang>.ts` and compile `i18n/guided_tour_<lang>.qm`. Commit both files.
+- A new language: add `tools/translations/<lang>.json` and run the script.
 
 ## Separate window / second screen
 

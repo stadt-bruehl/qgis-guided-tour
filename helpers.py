@@ -13,6 +13,7 @@ from qgis.core import (
 )
 
 from .compat import INFO, SUCCESS, WARNING
+from .translate import tr
 
 TAG = "guided_tour/helper"
 
@@ -33,7 +34,7 @@ SAMPLE_CITIES = [
 
 
 def _message(iface, text, level=INFO):
-    iface.messageBar().pushMessage("Guided Tour", text, level=level, duration=4)
+    iface.messageBar().pushMessage(tr("Guided Tour"), text, level=level, duration=4)
 
 
 def _existing(tag_value):
@@ -45,8 +46,8 @@ def _existing(tag_value):
 
 def _zoom_to(iface, layer, factor=1.3):
     canvas = iface.mapCanvas()
-    tr = QgsCoordinateTransform(layer.crs(), canvas.mapSettings().destinationCrs(), QgsProject.instance())
-    extent = tr.transformBoundingBox(layer.extent())
+    xform = QgsCoordinateTransform(layer.crs(), canvas.mapSettings().destinationCrs(), QgsProject.instance())
+    extent = xform.transformBoundingBox(layer.extent())
     extent.scale(factor)
     canvas.setExtent(extent)
     canvas.refresh()
@@ -54,19 +55,19 @@ def _zoom_to(iface, layer, factor=1.3):
 
 def load_osm(iface):
     if _existing("osm") is not None:
-        _message(iface, "The OpenStreetMap map is already loaded.")
+        _message(iface, tr("The OpenStreetMap map is already loaded."))
         return
     uri = "type=xyz&url=https://tile.openstreetmap.org/{z}/{x}/{y}.png&zmax=19&zmin=0"
     layer = QgsRasterLayer(uri, "OpenStreetMap", "wms")
     if not layer.isValid():
-        _message(iface, "OpenStreetMap could not be loaded – please check your internet connection or proxy.", WARNING)
+        _message(iface, tr("OpenStreetMap could not be loaded – please check your internet connection or proxy."), WARNING)
         return
     layer.setCustomProperty(TAG, "osm")
     project = QgsProject.instance()
     project.addMapLayer(layer, False)
     root = project.layerTreeRoot()
     root.insertLayer(len(root.children()), layer)  # very bottom = background
-    _message(iface, "OpenStreetMap was loaded as the background map.", SUCCESS)
+    _message(iface, tr("OpenStreetMap was loaded as the background map."), SUCCESS)
 
 
 def load_sample_points(iface):
@@ -84,7 +85,7 @@ def load_sample_points(iface):
         layer.updateExtents()
         layer.setCustomProperty(TAG, "sample")
         QgsProject.instance().addMapLayer(layer)
-        _message(iface, "A sample point layer with ten cities is now available.", SUCCESS)
+        _message(iface, tr("A sample point layer with ten cities is now available."), SUCCESS)
     iface.setActiveLayer(layer)
     _zoom_to(iface, layer)
 
@@ -118,7 +119,7 @@ def open_buffer(iface):
     try:
         import processing
     except ImportError:
-        _message(iface, "The Processing plugin is not active (Plugins → Processing).", WARNING)
+        _message(iface, tr("The Processing plugin is not active (Plugins → Processing)."), WARNING)
         return
     params = {}
     sample = _existing("sample")
@@ -138,8 +139,8 @@ def _work_layer(iface):
         if active is not None and hasattr(active, "subsetString"):
             layer = active
     if layer is None:
-        _message(iface, "Please select a vector layer in the Layers panel first "
-                        "(or create the sample point layer).", WARNING)
+        _message(iface, tr("Please select a vector layer in the Layers panel first "
+                           "(or create the sample point layer)."), WARNING)
         return None
     iface.setActiveLayer(layer)
     return layer
@@ -179,22 +180,22 @@ def clear_filters(iface):
         if hasattr(layer, "subsetString") and layer.subsetString().strip():
             layer.setSubsetString("")
             n += 1
-    _message(iface, "{} filter(s) removed.".format(n) if n else "No filter is currently set.")
+    _message(iface, tr("{} filter(s) removed.").format(n) if n else tr("No filter is currently set."))
 
 
 def open_save_as(iface):
     if _work_layer(iface) is None:
         return
     _trigger(iface, "actionLayerSaveAs",
-             "Please right-click the layer → Export → Save Features As … to open it.")
+             tr("Please right-click the layer → Export → Save Features As … to open it."))
 
 
 def open_new_gpkg(iface):
-    _trigger(iface, "actionNewGeoPackageLayer", "Please open it via Layer → Create Layer → New GeoPackage Layer.")
+    _trigger(iface, "actionNewGeoPackageLayer", tr("Please open it via Layer → Create Layer → New GeoPackage Layer."))
 
 
 def open_new_shp(iface):
-    _trigger(iface, "actionNewVectorLayer", "Please open it via Layer → Create Layer → New Shapefile Layer.")
+    _trigger(iface, "actionNewVectorLayer", tr("Please open it via Layer → Create Layer → New Shapefile Layer."))
 
 
 def open_styling(iface):
@@ -202,7 +203,7 @@ def open_styling(iface):
 
     dock = iface.mainWindow().findChild(QDockWidget, "LayerStyling")
     if dock is None:
-        _message(iface, "Please press F7 to open the Layer Styling panel.", WARNING)
+        _message(iface, tr("Please press F7 to open the Layer Styling panel."), WARNING)
         return
     dock.setVisible(True)
     dock.raise_()
@@ -217,7 +218,7 @@ def enable_labels(iface):
     names = layer.fields().names()
     field = "name" if "name" in names else (names[0] if names else None)
     if field is None:
-        _message(iface, "The layer has no fields that could be labeled.", WARNING)
+        _message(iface, tr("The layer has no fields that could be labeled."), WARNING)
         return
     settings = QgsPalLayerSettings()
     settings.fieldName = field
@@ -230,7 +231,7 @@ def enable_labels(iface):
     layer.setLabeling(QgsVectorLayerSimpleLabeling(settings))
     layer.setLabelsEnabled(True)
     layer.triggerRepaint()
-    _message(iface, "Labeling enabled with field “{}”.".format(field), SUCCESS)
+    _message(iface, tr("Labeling enabled with field “{}”.").format(field), SUCCESS)
 
 
 HELPERS = {
@@ -251,12 +252,12 @@ HELPERS = {
 
 
 def label(name):
-    return HELPERS.get(name, (name, None))[0]
+    return tr(HELPERS.get(name, (name, None))[0])
 
 
 def run(name, iface):
     entry = HELPERS.get(name)
     if entry is None:
-        _message(iface, "Unknown helper action: {}".format(name), WARNING)
+        _message(iface, tr("Unknown helper action: {}").format(name), WARNING)
         return
     entry[1](iface)
